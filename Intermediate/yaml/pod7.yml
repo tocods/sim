@@ -8,14 +8,9 @@ metadata:
 spec:
   nodeName: host2
   containers:
-  - args:
-    - HOSTNAME
-    - KUBERNETES_PORT
-    image: nginx
+  - image: nginx
     name: containerHFSM1
     resources:
       requests:
         memory: 10000Mi
         cpu: 200m
-    command:
-    - printenv
