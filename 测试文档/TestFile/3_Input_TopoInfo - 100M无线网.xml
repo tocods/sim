@@ -43,20 +43,4 @@
         </EndSystem>
     </EndSystems>
 
-
-
-
-    <Wireless>
-        <EndSystem Name="GPM1" HwType="GPM" ATA="-1" EdeSubscriberIndex="-1" EquipmentPosition="-1" HwTableBankIndex="-1">
-            <AesPhysPorts>
-                <!-- 无线传输速率在此设置，speed = 100Mbps -->
-                <AesPhysPort Name="pio_A664_A" Speed="100" ACAddress="-1" Medium="-1" Network="A"/>
-                <AesPhysPort Name="pio_A664_B" Speed="100" ACAddress="-1" Medium="-1" Network="B"/>
-                <AesPhysPort Name="pio_A664_C" Speed="100" ACAddress="-1" Medium="-1" Network="C"/>
-                <AesPhysPort Name="pio_A664_D" Speed="100" ACAddress="-1" Medium="-1" Network="D"/>
-            </AesPhysPorts>
-        </EndSystem>
-    </Wireless>
-
-
 </NetworkTopo>

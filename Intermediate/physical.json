@@ -45,7 +45,7 @@
             "name": "edge1",
             "datacenter": "A",
             "type": "edge",
-            "ports": 4
+            "ports": 8
         },
         {
             "bw": 45000000000,
@@ -54,7 +54,7 @@
             "storage": 1363148800,
             "type": "host",
             "mips": 35000,
-            "pes": 1,
+            "pes": 8,
             "ram": 16384000
         },
         {
@@ -64,7 +64,7 @@
             "storage": 1363148800,
             "type": "host",
             "mips": 20000,
-            "pes": 1,
+            "pes": 8,
             "ram": 16384000
         },
         {
@@ -74,27 +74,27 @@
             "storage": 1363148800,
             "type": "host",
             "mips": 30000,
-            "pes": 1,
+            "pes": 8,
             "ram": 16384000
         }
     ],
     "links": [
         {
-            "latency": "0.001",
+            "latency": "0",
             "destination": "host1",
-            "name": "LINK1",
+            "name": "None",
             "source": "edge1"
         },
         {
-            "latency": "0.001",
+            "latency": "0",
             "destination": "host2",
-            "name": "LINK2",
+            "name": "None",
             "source": "edge1"
         },
         {
-            "latency": "0.001",
+            "latency": "0",
             "destination": "host3",
-            "name": "LINK3",
+            "name": "None",
             "source": "edge1"
         },
         {

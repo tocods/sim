@@ -83,9 +83,10 @@ public class SimulatorApi {
      * @param fullFilePath 文件原路径
      */
     public static void uploadtopo(String fullFilePath) {
-        String sysFilePath = System.getProperty("user.dir")+"\\InputFiles" + "\\Input_TopoInfo.xml";
-        System.out.println("上传topo.xml文件到系统："+sysFilePath + " : " + fullFilePath);
-        uploadFileToSys(fullFilePath, sysFilePath);
+//        String sysFilePath = System.getProperty("user.dir")+"\\InputFiles" + "\\Input_TopoInfo.xml";
+//        System.out.println("上传topo.xml文件到系统："+sysFilePath + " : " + fullFilePath);
+//        uploadFileToSys(fullFilePath, sysFilePath);
+        Constants.topoFile = new File(fullFilePath);
     }
 
     /**
@@ -123,7 +124,7 @@ public class SimulatorApi {
             hostnames.add(host.getString("name"));
         }
         // 所有的valid交换机名
-        xml = Files.lines(Paths.get(input_topo)).reduce("", String::concat);//Files.readString(Path.of(input_topo));
+        xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);
         JSONObject topojson = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
         JSONObject swes = topojson.getJSONObject("Switches");
         JSONArray swches = new JSONArray();
@@ -143,11 +144,11 @@ public class SimulatorApi {
         for(Object obj : links) {
             JSONObject link = (JSONObject) obj;
             if(!hostnames.contains(link.getString("Src"))){//非法主机名
-                PrintInvalidName(link.getString("Src"), input_topo);
+                PrintInvalidName(link.getString("Src"), Constants.topoFile.getPath());
                 flag = false;
             }
             if(!hostnames.contains(link.getString("Dst"))){//非法主机名
-                PrintInvalidName(link.getString("Dst"), input_topo);
+                PrintInvalidName(link.getString("Dst"), Constants.topoFile.getPath());
                 flag = false;
             }
         }
@@ -158,7 +159,8 @@ public class SimulatorApi {
      * 将主机文件、拓扑文件转换为json中间文件
      */
     public void convertphytopo() throws IOException {
-        String xml = Files.lines(Paths.get(input_topo)).reduce("", String::concat);
+        String xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);
+        Set<String> linkNameSet = new HashSet<>();
         JSONObject topojson = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
         JSONObject swes = topojson.getJSONObject("Switches");
         JSONArray swches = new JSONArray();
@@ -168,24 +170,12 @@ public class SimulatorApi {
             swches.clear();
             swches.put(swes.getJSONObject("Switch"));
         }
-        JSONArray links = topojson.getJSONObject("Links").getJSONArray("Link");
+//        JSONArray links = topojson.getJSONObject("Links").getJSONArray("Link");
+        //新建所有的平台
         Set<String> dcnames = new HashSet<>();
         for(Object obj : swches){
             JSONObject swch = (JSONObject) obj;
-            String dcname = swch.getString("Network");
-//            (long) swch.getDouble("Speed")*1000000)
-            if(swch.getDouble("Speed") >= 100) {
-                ethernetSpeed = 100000000; //100G
-                monitoringTimeInterval = 0.000010; //10微秒
-            }
-            else if(swch.getDouble("Speed") >= 40) {
-                ethernetSpeed = 40000000;
-                monitoringTimeInterval = 0.000010; //10微秒
-            }
-            else {
-                ethernetSpeed = 10000000;
-                monitoringTimeInterval = 0.000010; //10微秒
-            }
+            String dcname = swch.getString("Group");
             dcnames.add(dcname);
         }
         JSONObject topo = new JSONObject();
@@ -224,30 +214,49 @@ public class SimulatorApi {
                     .put("bw", 100000000) //100M
             );
         }
-        // 新建所有的交换机、links
+        // 新建所有的交换机
         for(Object obj : swches){
             JSONObject swch = (JSONObject) obj;
-            if(swch.getString("Type").equals("wirelessAP")){
+            String swchname = swch.getString("Name");
+            // 该交换机的类型，普通交换机 or 无线接入点
+            if(swch.getString("Type").equals("WirelessAp")){
                 swch.put("Type", "core");
+            } else {
+                swch.put("Type", "edge");
             }
+            // 该交换机的带宽
+            JSONArray ports = swch.getJSONObject("AswPhysPorts").getJSONArray("AswPhysPort");
+            double bw = ((JSONObject)ports.get(0)).getDouble("Speed");
+            // 创建交换机节点
             topo.accumulate("nodes", new JSONObject()
                     .put("upports", 0)
                     .put("downports", 0)
                     .put("iops", 1000000000)
                     .put("name",swch.getString("Name"))
                     .put("type",swch.getString("Type"))
-                    .put("datacenter",swch.getString("Network"))
-                    .put("ports",swch.getInt("PortNum"))
-                    .put("bw",(long) swch.getDouble("Speed")*1000000));
-        }
-        for(Object obj : links){
-            JSONObject link = (JSONObject) obj;
-            topo.accumulate("links", new JSONObject()
-                    .put("source",link.getString("Src"))
-                    .put("destination",link.getString("Dst"))
-                    .put("latency",String.valueOf(link.getDouble("Latency")))
-                    .put("name", link.getString("Name"))
-            );
+                    .put("datacenter",swch.getString("Group"))
+                    .put("ports",8)
+                    .put("bw",(long)bw * 1000000));
+            // 创建 交换机的链路连接
+            for(Object obj1 : ports){
+                JSONObject port = (JSONObject)obj1;
+                //如果没有连接，跳过
+                if(port.getString("LinkedHwName").equals("")){
+                    continue;
+                }
+                //如果有重复，跳过；
+                if(linkNameSet.contains(swchname+"@"+port.getString("LinkedHwName")) || linkNameSet.contains(port.getString("LinkedHwName")+"@"+swchname)){
+                    continue;
+                }
+                topo.accumulate("links", new JSONObject()
+                    .put("source",swchname)
+                    .put("destination",port.getString("LinkedHwName"))
+                    .put("latency", "0")
+                    .put("name", "None")
+                );
+                linkNameSet.add(swchname+"@"+port.getString("LinkedHwName"));
+                linkNameSet.add(port.getString("LinkedHwName")+"@"+swchname);
+            }
         }
         // 补建links：gateway<->interswitch
         for(String dcname : dcnames){
@@ -261,12 +270,12 @@ public class SimulatorApi {
         // 补建links：core<->gateway
         for(Object obj : swches){
             JSONObject swch = (JSONObject) obj;
-            if( swch.getString("Type").equals("core")){
+            if(swch.getString("Type").equals("core") || swch.getString("Type").equals("WirelessAp")){
                 topo.accumulate("links", new JSONObject()
                         .put("source",swch.getString("Name"))
-                        .put("destination","gw"+swch.getString("Network"))
+                        .put("destination","gw"+swch.getString("Group"))
                         .put("latency","0")
-                        .put("name", "gw"+swch.getString("Network")+"-core")
+                        .put("name", "gw"+swch.getString("Group")+"-core")
                 );
             }
         }
@@ -292,14 +301,12 @@ public class SimulatorApi {
         writer.write(jsonPrettyPrintString);
         writer.close();
         try {
-            JSONObject endsys = topojson
-                    .getJSONObject("EndSystems")
-                    .getJSONObject("EndSystem")
-                    .getJSONObject("AesPhysPorts");
-            JSONArray sys = endsys.getJSONArray("AesPhysPort");
-            for (Object obj : sys) {
+            JSONObject apjson = topojson
+                    .getJSONObject("Aps");
+            JSONArray aps = apjson.getJSONArray("Ap");
+            for (Object obj : aps) {
                 JSONObject wirelesschan = (JSONObject) obj;
-                String name = wirelesschan.getString("Network");
+                String name = wirelesschan.getString("Group");
                 long bw = (long) (wirelesschan.getDouble("Speed") * 1000); //MB
                 wirelessChan_bw.put(name, bw);
             }
