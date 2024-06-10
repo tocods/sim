@@ -12,7 +12,7 @@ public class simulator {
         SchedulerApi schedulerApi = new SchedulerApi();
         schedulerApi.createDir();
         //更改输出文件目录
-        //schedulerApi.setSchedulerOutputPath(System.getProperty("user.dir") + "\\输出");
+        schedulerApi.setSchedulerOutputPath(System.getProperty("user.dir") + "\\输出");
         schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo .xml");
         schedulerApi.uploadHostsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\1_Input_Hosts - 3主机.xml");
         schedulerApi.uploadContainerInfo(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\ContainerInfo8.xml");

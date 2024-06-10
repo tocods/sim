@@ -22,7 +22,7 @@ public class LogWriter {
 	}
 
 	public static LogWriter getLogger(String name) {
-		String exName = Configuration.workingDirectory+Configuration.experimentName+name;
+		String exName = /*Configuration.workingDirectory+Configuration.experimentName+*/name;
 		LogWriter writer = map.get(exName);
 		if(writer != null)
 			return writer;
@@ -33,7 +33,7 @@ public class LogWriter {
 	}
 
 	public static void resetLogger(String name) {
-		String exName = Configuration.workingDirectory+Configuration.experimentName+name;
+		String exName = /*Configuration.workingDirectory+Configuration.experimentName+*/name;
 		LogWriter writer = map.get(exName);
 		if(writer != null) {
 			map.remove(exName);

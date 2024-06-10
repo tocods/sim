@@ -432,7 +432,7 @@ public class SimulatorApi {
             String args[] = {"", Constants.intermediatePath+"\\physical.json", Constants.intermediatePath+"\\virtual.json", ""};
             LogWriter.resetLogger(Constants.outputPath+"\\link_utilization.xml");
             //带宽利用率writer
-            LogWriter log = LogWriter.getLogger(Constants.outputPath+"\\link_utilization.xml");
+            LogWriter log = new LogWriter(Constants.outputPath+"\\link_utilization.xml");
             log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             log.printLine("<Links Timespan=\"" + monitoringTimeInterval + "\">");
             /* 新建一个仿真器 */
