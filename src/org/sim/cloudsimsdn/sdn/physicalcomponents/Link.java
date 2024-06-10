@@ -254,7 +254,7 @@ public class Link {
 				&& this.highOrder instanceof IntercloudSwitch != true
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true){
-			LogWriter log = LogWriter.getLogger(Constants.outputPath+"\\link_utilization.xml");
+			LogWriter log = LogWriter.getLogger(Constants.outputPath+"\\bandwidthUtil\\link_utilization.xml");
 			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +String.format("%.6f", logTime-timeUnit) + "\" Endtime=\"" +String.format("%.6f", logTime) +"\" Src=\"" +this.lowOrder+ "\" Dst=\"" +this.highOrder+ "\" KBytes=\"" +monitoringProcessedBytesPerUnitUp+ "\" Util=\"" +utilization1+ "\" />");
 			monitoringProcessedBytesPerUnitUp = 0;
 			CloudSim.bwTotalutil += utilization1;
@@ -274,7 +274,7 @@ public class Link {
 				&& this.highOrder instanceof IntercloudSwitch != true
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true) {
-			LogWriter log = LogWriter.getLogger(Constants.outputPath+"\\link_utilization.xml");
+			LogWriter log = LogWriter.getLogger(Constants.outputPath+"\\bandwidthUtil\\link_utilization.xml");
 			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +String.format("%.6f", logTime-timeUnit) + "\" Endtime=\"" +String.format("%.6f", logTime) +"\" Src=\"" +this.highOrder+ "\" Dst=\"" +this.lowOrder+ "\" KBytes=\"" +monitoringProcessedBytesPerUnitDown+ "\" Util=\"" +utilization2+ "\" />");
 			monitoringProcessedBytesPerUnitDown = 0;
 			CloudSim.bwTotalutil += utilization2;

@@ -30,8 +30,8 @@ public class SDNController {
     private String virtualf = Constants.intermediatePath+"\\virtual.json";
 //    public static String workloadf = "./Intermediate/messages.json";
     public static String workload_result = Constants.outputPath+"\\result_messages.csv";
-    private String latency_result = Constants.outputPath+"\\output_latency.xml";
-    private String bwutil_result = Constants.outputPath+"\\link_utilization.xml";
+    private String latency_result = Constants.outputPath+"\\latency\\output_latency.xml";
+    private String bwutil_result = Constants.outputPath+"\\bandwidthUtil\\link_utilization.xml";
     private Map<String, Long> wirelessChan_bw = new HashMap<>();
 //    public static Map<String, LinkUtil> linkUtilMap = new HashMap<>();
     private boolean halfDuplex = false;

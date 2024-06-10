@@ -430,9 +430,9 @@ public class SimulatorApi {
             //将输入appinfo.xml文件转换为中间JSON文件
             convertAPP();
             String args[] = {"", Constants.intermediatePath+"\\physical.json", Constants.intermediatePath+"\\virtual.json", ""};
-            LogWriter.resetLogger(Constants.outputPath+"\\link_utilization.xml");
+            LogWriter.resetLogger(Constants.outputPath+"\\bandwidthUtil\\link_utilization.xml");
             //带宽利用率writer
-            LogWriter log = new LogWriter(Constants.outputPath+"\\link_utilization.xml");
+            LogWriter log = new LogWriter(Constants.outputPath+"\\bandwidthUtil\\link_utilization.xml");
             log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             log.printLine("<Links Timespan=\"" + monitoringTimeInterval + "\">");
             /* 新建一个仿真器 */
@@ -442,7 +442,7 @@ public class SimulatorApi {
             pure_msgs.clear();
             /* 仿真的主函数 */
             wls.addAll( simulator.main(args) );
-            log = LogWriter.getLogger(Constants.outputPath+"\\link_utilization.xml");
+            log = LogWriter.getLogger(Constants.outputPath+"\\bandwidthUtil\\link_utilization.xml");
             log.printLine("</Links>");
             //延迟结果写入输出文件
             outputdelay(wls);
@@ -463,7 +463,7 @@ public class SimulatorApi {
      */
     public void outputdelay(List<Workload> wls) throws IOException{
         //创建xml
-        File file = new File(Constants.outputPath+"\\output_latency.xml");
+        File file = new File(Constants.outputPath+"\\latency\\output_latency.xml");
         file.createNewFile();
         // 写入
         FileWriter fw = new FileWriter(file.getAbsoluteFile());
