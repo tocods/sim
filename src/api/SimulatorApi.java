@@ -23,7 +23,7 @@ import static org.sim.controller.MyPainter.paintMultiLinkGraph;
 
 public class SimulatorApi {
     private SimpleExampleInterCloud simulator;
-    private String input_topo = "./InputFiles/Input_TopoInfo.xml";
+//    private String input_topo = "./InputFiles/Input_TopoInfo.xml";
     private String input_host = "./InputFiles/Input_Hosts.xml";
     private String input_container = "./Intermediate/assign.json";
     public static String input_app = "./InputFiles/Input_AppInfo.xml";
@@ -297,7 +297,7 @@ public class SimulatorApi {
         }
         String jsonPrettyPrintString = topo.toString(4);
         //保存格式化后的json
-        FileWriter writer = new FileWriter(physicalf);
+        FileWriter writer = new FileWriter(Constants.intermediatePath+"\\physical.json");
         writer.write(jsonPrettyPrintString);
         writer.close();
         try {
@@ -347,7 +347,7 @@ public class SimulatorApi {
      * 将app任务文件、容器分配文件转换为json中间文件
      */
     public void convertvirtopo() throws IOException{
-        String content = Files.lines(Paths.get(input_container)).reduce("", String::concat);// Files.readString(Path.of(input_container));
+        String content = Files.lines(Paths.get(Constants.intermediatePath+"\\assign.json")).reduce("", String::concat);// Files.readString(Path.of(input_container));
         JSONArray json = new JSONArray(content);
         JSONObject vir = new JSONObject();
         for(Object obj : json){
@@ -370,7 +370,7 @@ public class SimulatorApi {
         vir.put("policies", new JSONArray());
         String jsonPrettyPrintString = vir.toString(4);
         //保存格式化后的json
-        FileWriter writer = new FileWriter(virtualf);
+        FileWriter writer = new FileWriter(Constants.intermediatePath+"\\virtual.json");
         writer.write(jsonPrettyPrintString);
         writer.close();
     }
@@ -380,7 +380,7 @@ public class SimulatorApi {
      */
     public void convertAPP() throws IOException{
         //读result1制作ip->starttime/endtime的字典
-        String content = Files.lines(Paths.get(input_container)).reduce("", String::concat);// Files.readString(Path.of(input_container));
+        String content = Files.lines(Paths.get(Constants.intermediatePath+"\\assign.json")).reduce("", String::concat);// Files.readString(Path.of(input_container));
         JSONArray json = new JSONArray(content);
         assignInfoMap = new HashMap<>();
         for(Object obj : json) {
@@ -429,10 +429,10 @@ public class SimulatorApi {
             convertvirtopo();
             //将输入appinfo.xml文件转换为中间JSON文件
             convertAPP();
-            String args[] = {"", physicalf, virtualf, ""};
-            LogWriter.resetLogger(bwutil_result);
+            String args[] = {"", Constants.intermediatePath+"\\physical.json", Constants.intermediatePath+"\\virtual.json", ""};
+            LogWriter.resetLogger(Constants.outputPath+"\\link_utilization.xml");
             //带宽利用率writer
-            LogWriter log = LogWriter.getLogger(bwutil_result);
+            LogWriter log = LogWriter.getLogger(Constants.outputPath+"\\link_utilization.xml");
             log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             log.printLine("<Links Timespan=\"" + monitoringTimeInterval + "\">");
             /* 新建一个仿真器 */
@@ -442,7 +442,7 @@ public class SimulatorApi {
             pure_msgs.clear();
             /* 仿真的主函数 */
             wls.addAll( simulator.main(args) );
-            log = LogWriter.getLogger(bwutil_result);
+            log = LogWriter.getLogger(Constants.outputPath+"\\link_utilization.xml");
             log.printLine("</Links>");
             //延迟结果写入输出文件
             outputdelay(wls);
@@ -463,7 +463,7 @@ public class SimulatorApi {
      */
     public void outputdelay(List<Workload> wls) throws IOException{
         //创建xml
-        File file = new File(latency_result);
+        File file = new File(Constants.outputPath+"\\output_latency.xml");
         file.createNewFile();
         // 写入
         FileWriter fw = new FileWriter(file.getAbsoluteFile());
