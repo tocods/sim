@@ -8,7 +8,8 @@ public class scheduler {
         SchedulerApi schedulerApi = new SchedulerApi();
         // 创建输出文件目录和中间文件目录
         schedulerApi.createDir();
-        schedulerApi.setSchedulerOutputPath(System.getProperty("user.dir") + "\\输出");
+        // 更改输出文件目录
+        //schedulerApi.setSchedulerOutputPath(System.getProperty("user.dir") + "\\输出");
         // 传入应用信息输入文件
         schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo .xml");
         // 传入物理节点信息输入文件
