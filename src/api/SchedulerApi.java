@@ -151,7 +151,7 @@ public class SchedulerApi {
         try {
             String path;
             if(!Objects.equals(Constants.outputPath,"")) {
-                path = Constants.intermediatePath +  "\\yaml";
+                path = Constants.outputPath +  "\\yaml";
             } else {
                 path = System.getProperty("user.dir") + "\\OutputFiles\\yaml";
             }
