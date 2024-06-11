@@ -24,13 +24,13 @@ import static org.sim.controller.MyPainter.paintMultiLinkGraph;
 public class SimulatorApi {
     private SimpleExampleInterCloud simulator;
 //    private String input_topo = "./InputFiles/Input_TopoInfo.xml";
-    private String input_host = "./InputFiles/Input_Hosts.xml";
-    private String input_container = "./Intermediate/assign.json";
-    public static String input_app = "./InputFiles/Input_AppInfo.xml";
-    private String physicalf = "./Intermediate/physical.json";
-    private String virtualf = "./Intermediate/virtual.json";
-    private String latency_result = "./OutputFiles/latency/output_latency.xml";
-    private String bwutil_result = "./OutputFiles/bandwidthUtil/link_utilization.xml";
+//    private String input_host = "./InputFiles/Input_Hosts.xml";
+//    private String input_container = "./Intermediate/assign.json";
+//    public static String input_app = "./InputFiles/Input_AppInfo.xml";
+//    private String physicalf = "./Intermediate/physical.json";
+//    private String virtualf = "./Intermediate/virtual.json";
+//    private String latency_result = "./OutputFiles/latency/output_latency.xml";
+//    private String bwutil_result = "./OutputFiles/bandwidthUtil/link_utilization.xml";
     private Map<String, Long> wirelessChan_bw = new HashMap<>();
     public static long ethernetSpeed = 10000000; //10G
     public static double simulationStopTime = 1000.0; //仿真持续时间，微秒
@@ -161,6 +161,7 @@ public class SimulatorApi {
     public void convertphytopo() throws IOException {
         String xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);
         Set<String> linkNameSet = new HashSet<>();
+        Set<String> wirelessSwitchSet= new HashSet();
         JSONObject topojson = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
         JSONObject swes = topojson.getJSONObject("Switches");
         JSONArray swches = new JSONArray();
@@ -169,6 +170,20 @@ public class SimulatorApi {
         } catch (Exception e){
             swches.clear();
             swches.put(swes.getJSONObject("Switch"));
+        }
+        //解析无线AP
+        try {
+            JSONObject apjson = topojson
+                    .getJSONObject("Aps");
+            JSONArray aps = apjson.getJSONArray("Ap");
+            for (Object obj : aps) {
+                JSONObject wirelesschan = (JSONObject) obj;
+                String name = wirelesschan.getString("Group");
+                long bw = (long) (wirelesschan.getDouble("Speed") * 1000); //MB
+                wirelessChan_bw.put(name, bw);
+                wirelessSwitchSet.add(wirelesschan.getString("Name"));
+            }
+        }catch (Exception e) {
         }
 //        JSONArray links = topojson.getJSONObject("Links").getJSONArray("Link");
         //新建所有的平台
@@ -219,7 +234,7 @@ public class SimulatorApi {
             JSONObject swch = (JSONObject) obj;
             String swchname = swch.getString("Name");
             // 该交换机的类型，普通交换机 or 无线接入点
-            if(swch.getString("Type").equals("WirelessAp")){
+            if( wirelessSwitchSet.contains(swchname) ){
                 swch.put("Type", "core");
             } else {
                 swch.put("Type", "edge");
@@ -300,18 +315,7 @@ public class SimulatorApi {
         FileWriter writer = new FileWriter(Constants.intermediatePath+"\\physical.json");
         writer.write(jsonPrettyPrintString);
         writer.close();
-        try {
-            JSONObject apjson = topojson
-                    .getJSONObject("Aps");
-            JSONArray aps = apjson.getJSONArray("Ap");
-            for (Object obj : aps) {
-                JSONObject wirelesschan = (JSONObject) obj;
-                String name = wirelesschan.getString("Group");
-                long bw = (long) (wirelesschan.getDouble("Speed") * 1000); //MB
-                wirelessChan_bw.put(name, bw);
-            }
-        }catch (Exception e) {
-        }
+
         CloudSim.bwLimit = 1.0;
 
         try {
