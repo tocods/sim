@@ -27,7 +27,7 @@ public class simulator {
         Log.printLine("启动成功");
         SchedulerApi schedulerApi = new SchedulerApi();
         schedulerApi.createDir();
-        schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo .xml");
+        schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo - 无线.xml");
         schedulerApi.uploadHostsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\3_Input_Hosts - 无线8主机.xml");
         schedulerApi.uploadContainerInfo(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\ContainerInfo8.xml");
         schedulerApi.startSchedule(SchedulerApi.K8S);
