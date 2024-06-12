@@ -1,8 +1,11 @@
 package api;
 
+import org.apache.commons.math3.util.Pair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
+import org.sim.cloudbus.cloudsim.Host;
+import org.sim.cloudbus.cloudsim.Log;
 import org.sim.cloudsimsdn.core.CloudSim;
 import org.sim.cloudsimsdn.sdn.LogWriter;
 import org.sim.cloudsimsdn.sdn.main.SimpleExampleInterCloud;
@@ -531,5 +534,59 @@ public class SimulatorApi {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 绘制指定的物理节点cpu使用率图像
+     * @param hosts 物理节点名，以空格分隔，egg: "host1 host2 host3"
+     */
+    public ResultDTO specifiedCpu(String hosts)  {
+        String[] hostNames = hosts.split(" ");
+        for(String hostName: hostNames) {
+            Host h = null;
+            for (Host host : Constants.hosts) {
+                if (host.getName().equals(hostName)) {
+                    h = host;
+                    break;
+                }
+            }
+            if (h == null) {
+                return ResultDTO.error("未找到符合要求的物理节点");
+            }
+            try {
+                MyPainter p = new MyPainter("");
+                p.paintHost(h);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResultDTO.error(e.getMessage());
+            }
+        }
+        return ResultDTO.success(null);
+    }
+
+    /**
+     * 暂停任务
+     * @param appId 要暂停的任务在输入文件中的位置，从1开始
+     * @param start 每个周期开始运行多久后暂停
+     * @param last 暂停持续多久
+     */
+    public ResultDTO pauseContainer(Integer appId, Double start, Double last) {
+        Constants.pause.put(appId, new Pair<>(start, last));
+        Log.printLine("AppInfo中输入的第"+appId+"个容器将在每次运行" + start + "s后暂停" + last + "s");
+        return ResultDTO.success("container " + appId + " will be paused");
+    }
+
+
+    /**
+     * 取消暂停
+     * @param appId 要取消暂停的任务在输入文件中的位置，从1开始
+     */
+    public ResultDTO deletePause(Integer appId) {
+        if(appId == -1) {
+            Constants.pause = new HashMap<>();
+        } else {
+            Constants.pause.remove(appId);
+        }
+        return ResultDTO.success("delete pause");
     }
 }

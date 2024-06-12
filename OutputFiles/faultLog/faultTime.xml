@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-  <FaultTime time="139.633" />
-  <FaultTime time="406.203" />
-  <FaultTime time="593.153" />
-  <FaultTime time="708.963" />
-  <FaultTime time="716.240" />
-  <FaultTime time="768.565" />
-  <FaultTime time="791.734" />
+  <FaultTime time="80.030" />
+  <FaultTime time="615.807" />
+  <FaultTime time="913.869" />
+  <FaultTime time="920.350" />
 </root>

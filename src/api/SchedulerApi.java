@@ -1,5 +1,6 @@
 package api;
 
+import org.apache.commons.math3.util.Pair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.sim.cloudbus.cloudsim.Host;
@@ -21,9 +22,6 @@ import org.sim.service.service;
 public class SchedulerApi {
     private service service;
 
-    private String iPath = "";
-
-    private String yPath = "";
 
     public static Integer MAXMIN = 2;
     public static Integer K8S = 7;
@@ -362,7 +360,7 @@ public class SchedulerApi {
      * @param path c错误注入文件路径
      * @return ResultDTO.ifSuccess() 判断输入文件是否有误
      */
-    public ResultDTO uploadFault(String path) throws IOException {
+    public ResultDTO uploadFault(String path) {
         System.out.println("FaultInject.xml:" + path);
         File faultfile = new File(path);
         Constants.faultFile = faultfile;
@@ -409,6 +407,87 @@ public class SchedulerApi {
         }catch (Exception e) {
             return ResultDTO.error(e.getMessage());
         }
+    }
+
+    /**
+     * 获取调度结果
+     * @return 调度结果
+     */
+    public List<Result> getScheduleResults() {
+        List<Result> ret = new ArrayList<>();
+        for(Result r: Constants.results) {
+            ret.add(r.getNewResult());
+        }
+        return Constants.results;
+    }
+
+    /**
+     * 调整调度
+     * @param objects 修改后的调度结果
+     * @return
+     */
+    public ResultDTO staticSimulate(List<Result> objects) {
+        try {
+            Constants.staticApp2Host = new HashMap<>();
+            int size = objects.size();
+            Log.printLine("更新后的调度结果：");
+            List<Pair<Double, Double>> hosts = new ArrayList<>();
+            for(Host h: Constants.hosts) {
+                hosts.add(new Pair<Double, Double>(Double.valueOf(h.getNumberOfPes()), Double.valueOf(h.getRamProvisioner().getRam())));
+            }
+            for(int i = 0; i < size; i++){
+                Result r  = objects.get(i);
+                Constants.staticApp2Host.put(r.app, r.host);
+                Log.printLine("任务" + r.app + " ===> 节点" + r.host);
+                Integer hostId = -1;
+                for(Host h: Constants.hosts) {
+                    if(h.getName().equals(r.host)) {
+                        hostId = h.getId();
+                        break;
+                    }
+                }
+                if(hostId == -1) {
+                    Log.printLine(r.host + "不存在");
+                    return ResultDTO.success(r.host + "不存在");
+                }
+                Double pes = hosts.get(hostId).getKey();
+                Double ram = hosts.get(hostId).getValue();
+                Double totalRetPe = Constants.hosts.get(hostId).getNumberOfPes() * (1 - Constants.cpuUp);
+                Double totalRetRam = Constants.hosts.get(hostId).getRamProvisioner().getRam() * (1 - Constants.ramUp);
+                pes -= r.pes * 1000;
+                ram -= r.ram;
+                if(pes <= totalRetPe || ram <= totalRetRam) {
+                    Log.printLine("物理机" + r.host + "超载");
+                    return ResultDTO.error("物理机" + r.host + "超载");
+                }
+                hosts.add(hostId, new Pair<>(pes, ram));
+                Constants.schedulerResult.put(r.app, hostId);
+            }
+            Constants.results = new ArrayList<>();
+            Constants.logs = new ArrayList<>();
+            Constants.resultPods = new ArrayList<>();
+            Constants.id2Name = new HashMap<>();
+            Constants.nodeEnough = true;
+            Constants.faultNum = new HashMap<>();
+            Constants.records = new ArrayList<>();
+            Constants.apps = new ArrayList<>();
+            Constants.ip2taskName = new HashMap<>();
+            Constants.name2Ips = new HashMap<>();
+            simulate(8, 1, 0.0);
+            YamlWriter writer = new YamlWriter();
+            try {
+                String path = System.getProperty("user.dir")+"\\OutputFiles\\yaml";
+                File dir = new File(path);
+                writer.writeYaml(path);
+            } catch (Exception e) {
+                return ResultDTO.error(e.getMessage());
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResultDTO.error(e.getMessage());
+        }
+        DecimalFormat dft = new DecimalFormat("###.##");
+        return ResultDTO.success(Constants.balanceScore);
     }
 
     /**

@@ -273,7 +273,7 @@ public class service {
         if(Constants.ifSimulate) {
             Log.printLine("========== OUTPUT ==========");
             Log.printLine("Task Name" + indent + "Task ID" + indent + "STATUS" + indent
-                    + "Host ID" + indent + indent
+                    + "Host" + indent + indent
                     + "Time" + indent + "Start Time" + indent + "Finish Time" + indent + "Depth");
         }
         DecimalFormat dft = new DecimalFormat("###.##");
@@ -298,10 +298,20 @@ public class service {
                 Log.print(indent);
 
             if (job.getCloudletStatus() == Cloudlet.SUCCESS) {
+                Host host = null;
+                for(Host h: Constants.hosts) {
+                    if(h.getId() == job.getVmId()) {
+                        host = h;
+                        break;
+                    }
+                }
+                if(host == null) {
+                    continue;
+                }
                 if(Constants.ifSimulate) {
                     Log.print("SUCCESS");
                     totalTime += job.getFinishTime() - job.getExecStartTime();
-                    Log.printLine(indent + indent + indent + job.getVmId()
+                    Log.printLine(indent + indent + indent + host.getName()
                             + indent + indent + indent + dft.format(job.getActualCPUTime())
                             + indent + indent + dft.format(job.getExecStartTime()) + indent + indent + indent
                             + dft.format(job.getFinishTime()) + indent + indent + indent + job.getDepth());
@@ -325,16 +335,6 @@ public class service {
                         }
                     }
                     //r.host = "host" + job.getVmId();
-                    Host host = null;
-                    for(Host h: Constants.hosts) {
-                        if(h.getId() == job.getVmId()) {
-                            host = h;
-                            break;
-                        }
-                    }
-                    if(host == null) {
-                        continue;
-                    }
                     r.host = host.getName();
                     r.name = job.getTaskList().get(0).getType();
                     r.pes = Double.valueOf(job.getTaskList().get(0).getNumberOfPes()) / 1000;
