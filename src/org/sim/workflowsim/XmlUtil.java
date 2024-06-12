@@ -448,7 +448,6 @@ public final class XmlUtil {
                             }
                         }
                         if(cpuRequest == null) {
-                            Log.printLine("-------|");
                             Double cpus = 1000 * Double.parseDouble(computeTime) / Double.parseDouble(periodTime);
                             taskT.setNumberOfPes(cpus.intValue());
                         }else {
@@ -462,7 +461,6 @@ public final class XmlUtil {
                             double d = Double.parseDouble(startDown);
                             taskT.setUpAndDown(u, d);
                         }
-                        Log.printLine("===============");
                         taskT.setType(ip);
                         taskT.setUserId(userId);
                         taskT.setRam(reqMem);

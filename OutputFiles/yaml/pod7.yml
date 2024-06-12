@@ -4,11 +4,11 @@ metadata:
   name: HFSM8
   namespace: default
 spec:
-  nodeName: host8
+  nodeName: host3
   containers:
   - image: nginx
     name: containerHFSM8
     resources:
       requests:
         memory: 60000Mi
-        cpu: 875m
+        cpu: 300m
