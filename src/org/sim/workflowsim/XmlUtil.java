@@ -271,6 +271,8 @@ public final class XmlUtil {
             Element root = dom.getRootElement();
             List<Element> list = root.getChildren();
             for(Element app: list) {
+                if(!app.getName().equals("Application"))
+                    continue;
                 String name = app.getAttributeValue("Name");
                 Integer hostId = Constants.schedulerResult.get(name);
                 if(hostId == null) {
@@ -284,6 +286,40 @@ public final class XmlUtil {
                     }
                 }
                 app.setAttribute("Hardware", hostName);
+                List<Element> txports = app.getChildren();
+                for (Element tx : txports) {
+                    if (tx.getName().equals("TxPort")) {
+                        List<Element> msgs = tx.getChildren();
+                        if (msgs.isEmpty()) {
+                            continue;
+                        }
+                        for(Element msg: msgs) {
+                            if (!msg.getName().equals("Message"))
+                                continue;
+                            List<Element> rxports = msg.getChildren();
+                            for (Element rx : rxports) {
+                                if(!rx.getName().equals("RxPort"))
+                                    continue;
+                                name = rx.getAttributeValue("AppName");
+                                if(name == null) {}
+                                else {
+                                    hostId = Constants.schedulerResult.get(name);
+                                    if(hostId == null) {
+                                        continue;
+                                    }
+                                    hostName = "";
+                                    for(Host h: Constants.hosts) {
+                                        if(h.getId() == hostId) {
+                                            hostName = h.getName();
+                                            break;
+                                        }
+                                    }
+                                    rx.setAttribute("Hardware", hostName);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             XMLOutputter xmlOutput = new XMLOutputter();
             Format f = Format.getRawFormat();
@@ -346,13 +382,13 @@ public final class XmlUtil {
                                 new RamProvisionerSimple(memory_MB),
                                 new BwProvisionerSimple(bandwidth_gbps), storage_MB , pes,
                                 new VmSchedulerTimeShared(pes));
-                                //new ContainerPodSchedulerTimeShared(peList),
-                                //WFCConstants.HOST_POWER[2]);
+                        //new ContainerPodSchedulerTimeShared(peList),
+                        //WFCConstants.HOST_POWER[2]);
                         host.setName(name);
                         host.setCloudletScheduler(new CloudletSchedulerTimeShared());
                         host.datacenterName = network;
                         this.hostList.add(host);
-                        Log.printLine("new Host " + hostId + " with pe: " + pes_size + " ram: " + memory_MB + " mips: " + mips + " storage: " + storage + " bandwidth: " + bandwidth);
+                        Log.printLine("物理节点信息: || CPU数: 1 || 核数: " + pes_size + " || 内存: " + memory_MB + " || mips: " + mips + " || 存储: " + storage + " || 带宽: " + bandwidth + " ||" );
                         hostId ++;
                         //WFCConstants.hostMips.put(host.getId(), pe_mips);
                         break;
@@ -384,7 +420,7 @@ public final class XmlUtil {
                             if(element.getName().equals("scale")) this.scale = Double.parseDouble(element.getText());
                             if(element.getName().equals("shape")) this.shape = Double.parseDouble(element.getText());
                         }
-                        Log.printLine("Fault Inject: || type: " + fType + " || scale: " + this.scale + " || shape: " + shape);
+                        Log.printLine("错误建模信息: || type: " + fType + " || scale: " + this.scale + " || shape: " + shape + " ||");
                         break;
 
                     case "faultrepair":
@@ -401,6 +437,7 @@ public final class XmlUtil {
 
                     case "application":
                         String aName = node.getAttributeValue("Name");
+                        String aMac = node.getAttributeValue("MacAddress");
                         String requiredMem = node.getAttributeValue("RequiredMemorySize");
                         String periodTime = node.getAttributeValue("Period");
                         String hardware = node.getAttributeValue("Hardware");
@@ -418,7 +455,7 @@ public final class XmlUtil {
                         }
                         Constants.totalTime += computeT;
                         runtimeT *= Parameters.getRuntimeScale();
-                        List<Element> fileListT = node.getChildren();
+                        List<Element> txports = node.getChildren();
                         List<FileItem> mFileListT = new ArrayList<>();
                         Task taskT;
                         //In case of multiple workflow submission. Make sure the jobIdStartsFrom is consistent.
@@ -426,27 +463,37 @@ public final class XmlUtil {
                             taskT = new Task(this.jobIdStartsFrom, runtimeT);
                             this.jobIdStartsFrom++;
                         }
-                        for (Element file : fileListT) {
-                            if (file.getName().equals("TxPort")) {
-                                List<Pair<String, String>> ipAndSizes = new ArrayList<>();
-                                List<Element> f1 = file.getChildren();
-                                if (f1.isEmpty()) {
+                        List<Pair<String, String>> ipAndSizes = new ArrayList<>();
+                        Log.printLine("任务" + aName + "消息建模:");
+                        for (Element tx : txports) {
+                            if (tx.getName().equals("TxPort")) {
+                                String txname = tx.getAttributeValue("Name");
+                                List<Element> msgs = tx.getChildren();
+                                if (msgs.isEmpty()) {
                                     continue;
                                 }
-                                List<Element> ports = f1.get(0).getChildren();
-                                for (Element port : ports) {
-                                    String messageName = port.getAttributeValue("Name");
-                                    String messageSize = port.getAttributeValue("MessageSize");
-                                    String ipS = port.getAttributeValue("IpAddress");
-                                    String period = port.getAttributeValue("RefreshPeriod");
-                                    ipAndSizes.add(new Pair<>(ipS, messageSize));
-                                    Message message = new Message(Double.parseDouble(period) * Constants.averageMIPS, ipS, ip, messageName, Double.parseDouble(messageSize));
-                                    Log.printLine("消息建模:\t源:" + ip + "\t目的:" + ipS + "\t消息负载:" + messageSize + "\t消息周期:" + period);
-                                    taskT.messages.add(message);
+                                for(Element msg: msgs) {
+                                    if(!msg.getName().equals("Message"))
+                                        continue;
+                                    String messageSize = msg.getAttributeValue("MessageSize");
+                                    String messageName = msg.getAttributeValue("Name");
+                                    String period = msg.getAttributeValue("Period");
+                                    List<Element> rxports = msg.getChildren();
+                                    for (Element rx : rxports) {
+                                        if(!rx.getName().equals("RxPort"))
+                                            continue;
+                                        String rxName = rx.getAttributeValue("Name");
+                                        String rxnode = rx.getAttributeValue("Hardware");
+                                        String ipS = rx.getAttributeValue("IpAddress");
+                                        ipAndSizes.add(new Pair<>(ipS, messageSize));
+                                        Message message = new Message(Double.parseDouble(period) * Constants.averageMIPS, ipS, ip, rxName, Double.parseDouble(messageSize));
+                                        Log.printLine("| 源应用: " + aName   + "、 源物理节点: " + hardware + "、 源TxPort: " + txname + "、 源IP: " + ip +   " | -----" + " 消息负载:" + messageSize + "、 消息周期:" + period + "-----> | 目的应用: " + rx.getAttributeValue("AppName") + "、 目的物理节点: " + rxnode + "、 目的RxPort: "+ rxName +"、 目的IP: "+ ipS + " |");
+                                        taskT.messages.add(message);
+                                    }
                                 }
-                                Constants.name2Ips.put(aName, ipAndSizes);
                             }
                         }
+                        Constants.name2Ips.put(aName, ipAndSizes);
                         if(cpuRequest == null) {
                             Double cpus = 1000 * Double.parseDouble(computeTime) / Double.parseDouble(periodTime);
                             taskT.setNumberOfPes(cpus.intValue());
@@ -475,7 +522,7 @@ public final class XmlUtil {
                         taskT.setFileList(mFileListT);
                         taskT.setPeriodTime(Double.parseDouble(periodTime));
                         this.getTaskList().add(taskT);
-                        Log.printLine("Job " + taskT.name + " : || compute time: " + computeTime + " : || cpu request: " + taskT.getNumberOfPes() + "m || period: " + taskT.getPeriodTime() +" || ram: " + taskT.getRam() + " ip: " + taskT.getType() + " ||");
+                        Log.printLine("任务" + taskT.name + " 属性: || 运行时长: " + computeTime + " || 占用CPU: " + taskT.getNumberOfPes() + "m || 周期: " + taskT.getPeriodTime() +" || 占用内存: " + taskT.getRam() + " || IP: " + taskT.getType() + " || MAC: " + aMac + " ||");
                     case "":
                 }
             }

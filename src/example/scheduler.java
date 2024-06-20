@@ -17,7 +17,7 @@ public class scheduler {
         // 更改输出文件目录
         //schedulerApi.setSchedulerOutputPath(System.getProperty("user.dir") + "\\输出");
         // 传入应用信息输入文件
-        schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo-无线.xml");
+        schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo.xml");
         // 传入物理节点信息输入文件
         schedulerApi.uploadHostsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_Hosts.xml");
         // 传入容器信息输入文件
