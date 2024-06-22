@@ -173,6 +173,47 @@ public final class XmlUtil {
         }
     }
 
+    public void parseTopoInfo(File f) throws IOException, JDOMException {
+        SAXBuilder builder = new SAXBuilder();
+        //parse using builder to get DOM representation of the XML file
+        Document dom = builder.build(f);
+        Element root = dom.getRootElement();
+        List<Element> list = root.getChildren();
+        for (Element node : list) {
+            switch (node.getName().toLowerCase()) {
+                case "endsystems":
+                    for(Element endsystem: node.getChildren())  {
+                        String type = endsystem.getAttributeValue("HwType");
+                        if(!type.equals("GPM"))
+                            continue;
+                        String name = endsystem.getAttributeValue("Name");
+                        String mem = endsystem.getAttributeValue("Memory");
+                        String cores = endsystem.getAttributeValue("cores");
+                        String network = endsystem.getAttributeValue("Group");
+                        Double memory = Double.parseDouble(mem) * 1000;
+                        Integer cpucores = Integer.parseInt(cores);
+                        List<Pe> pes = new ArrayList<>();
+                        for(int i = 0; i < cpucores * 1000; i++) {
+                            pes.add(new Pe(i,new PeProvisionerSimple(Constants.averageMIPS)));
+                        }
+
+                        Host host = new Host(hostId,
+                                new RamProvisionerSimple(memory.intValue()),
+                                new BwProvisionerSimple(1000), Long.MAX_VALUE , pes,
+                                new VmSchedulerTimeShared(pes));
+                        //new ContainerPodSchedulerTimeShared(peList),
+                        //WFCConstants.HOST_POWER[2]);
+                        host.setName(name);
+                        host.setCloudletScheduler(new CloudletSchedulerTimeShared());
+                        host.datacenterName = network;
+                        this.hostList.add(host);
+                        Log.printLine("物理节点信息: || 节点名" + name + " || CPU数: 1 || 核数: " + cpucores + " || 内存: " + mem + " MB ||" );
+                        hostId ++;
+                    }
+                    break;
+            }
+        }
+    }
     /**
      *
      * 解析输入的 YAML 格式的容器信息文件
@@ -358,6 +399,7 @@ public final class XmlUtil {
                         } else if(typeS.equals("memory")) {
                             Constants.ramUp = Double.parseDouble(utilization);
                         }
+                        Log.printLine("资源利用率上限: || CPU利用率上限: " + Constants.cpuUp + " || 内存利用率上限: " + Constants.ramUp + " ||");
                         break;
                     case "node":
                         String name = node.getAttributeValue("name");

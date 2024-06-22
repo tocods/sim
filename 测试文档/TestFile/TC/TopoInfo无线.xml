@@ -57,20 +57,27 @@
   </Switches>
 
   <EndSystems>
-    <EndSystem Group="A" TA="-1" EdeSubscriberIndex="-1" EquipmentPosition="-1" HwTableBankIndex="-1" HwType="GPM" Name="host1" Memory="2096" cores="8">
+    <EndSystem Group="A" TA="-1" EdeSubscriberIndex="-1" EquipmentPosition="-1" HwTableBankIndex="-1" HwType="GPM" Name="host1" Memory="2096" cores="2">
       <AesPhysPorts>
         <AesPhysPort MACAddress="-1" Name="A" Network="A" Speed="100" />
       </AesPhysPorts>
     </EndSystem>
-    <EndSystem Group="A" ATA="快取记录装置" HwType="GPM" Name="host2" Memory="2096" cores="8">
+    <EndSystem Group="A" ATA="快取记录装置" HwType="GPM" Name="host2" Memory="2096" cores="2">
       <AesPhysPorts>
         <AesPhysPort Name="A" Speed="2g" />
       </AesPhysPorts>
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host3" Memory="2096" cores="8">
-      <AesPhysPorts>
-        <AesPhysPort Name="A" Speed="2g" />
-      </AesPhysPorts>
+    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host3" Memory="2096" cores="2">
+    </EndSystem>
+    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host4" Memory="2096" cores="2">
+    </EndSystem>
+    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host5" Memory="2096" cores="2">
+    </EndSystem>
+    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host6" Memory="2096" cores="2">
+    </EndSystem>
+    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host7" Memory="2096" cores="2">
+    </EndSystem>
+    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host8" Memory="2096" cores="2">
     </EndSystem>
    </EndSystems>
 

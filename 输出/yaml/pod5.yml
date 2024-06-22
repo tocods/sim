@@ -4,7 +4,7 @@ metadata:
   name: HFSM6
   namespace: default
 spec:
-  nodeName: host1
+  nodeName: host3
   containers:
   - image: nginx
     name: containerHFSM6

@@ -72,9 +72,10 @@ public class service {
                 Log.printLine("FaultInject: || "  + "type: " + f.name() + "  scale: " + s + " shape: " + shape + " ||");
             }
             // 解析物理节点文件
-            util.parseHostXml(Constants.hostFile);
+            util.parseTopoInfo(Constants.topoFile);
             hostList = util.getHostList();
             hostToBalance = new ArrayList<>(hostList);
+            util.parseHostXml(Constants.hostFile);
             int vmNum = 1;//number of vms;
             FailureParameters.FTCMonitor ftc_monitor = FailureParameters.FTCMonitor.MONITOR_ALL;
             FailureParameters.FTCFailure ftc_failure = FailureParameters.FTCFailure.FAILURE_ALL;

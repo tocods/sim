@@ -6,7 +6,7 @@ metadata:
   labels:
     type: App
 spec:
-  nodeName: host2
+  nodeName: host1
   containers:
   - image: nginx
     name: containerHFSM1

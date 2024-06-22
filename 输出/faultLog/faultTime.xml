@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-  <FaultTime time="67.098" />
-  <FaultTime time="335.875" />
-  <FaultTime time="472.605" />
-  <FaultTime time="530.199" />
-  <FaultTime time="573.119" />
-  <FaultTime time="620.326" />
-  <FaultTime time="881.283" />
-  <FaultTime time="922.533" />
-  <FaultTime time="965.769" />
+  <FaultTime time="16.830" />
+  <FaultTime time="29.919" />
+  <FaultTime time="56.276" />
+  <FaultTime time="89.245" />
+  <FaultTime time="149.666" />
+  <FaultTime time="412.642" />
+  <FaultTime time="534.203" />
+  <FaultTime time="601.430" />
+  <FaultTime time="611.697" />
+  <FaultTime time="670.035" />
+  <FaultTime time="700.838" />
+  <FaultTime time="748.118" />
+  <FaultTime time="807.406" />
+  <FaultTime time="883.347" />
 </root>

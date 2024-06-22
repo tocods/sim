@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+    <!-- 利用率约束 -->
+    <utilization type = "cpu" up = "1.0" />
+    <utilization type = "memory" up = "1.0"/>
+    <utilization type = "bandwidth" up = "1.0"/>
+</constraint>

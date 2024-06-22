@@ -23,7 +23,7 @@ import static org.sim.controller.MyPainter.*;
 public class SDNController {
     private SimpleExampleInterCloud simulator;
     private String input_topo = "./InputFiles/Input_TopoInfo.xml";
-    private String input_host = "./InputFiles/Input_Hosts.xml";
+    private String input_host = "./InputFiles/Input_Limits.xml";
     private String input_container = Constants.intermediatePath+"\\assign.json";
 //    public static String input_app = "./InputFiles/Input_AppInfo.xml";
     private String physicalf = Constants.intermediatePath+"\\physical.json";

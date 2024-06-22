@@ -255,16 +255,33 @@ public class SchedulerApi {
     }
     /**
      *
-     * @param path 物理节点信息文件路径
+     * @param path 物理节点资源利用率上限文件
      * @return ResultDTO.ifSuccess() 判断输入文件是否有误
      */
-    public ResultDTO uploadHostsXml(String path) {
-        System.out.println("hosts.xml: " + path);
+    public ResultDTO uploadLimitsXml(String path) {
+        System.out.println("limits.xml: " + path);
         Constants.hostFile = new File(path);
         XmlUtil util = new XmlUtil(1);
         util.parseHostXml(Constants.hostFile);
         Constants.hosts = util.getHostList();
         return ResultDTO.success("上传成功");
+    }
+
+    /**
+     * 上传拓扑文件到系统
+     * @param path 文件原路径
+     */
+    public ResultDTO uploadTopoXml(String path) {
+        try {
+            System.out.println("topo.xml: " + path);
+            Constants.topoFile = new File(path);
+            XmlUtil util = new XmlUtil(1);
+            util.parseTopoInfo(Constants.topoFile);
+            Constants.hosts = util.getHostList();
+            return ResultDTO.success("上传成功");
+        }catch (Exception e) {
+            return ResultDTO.error(e.getMessage());
+        }
     }
 
     /**

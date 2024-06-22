@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AppInfo RleaseDate="27/01/2021 21:52:29" ICDVerison="BP2.3.1">
   <!-- application中， Name为必填项，表示应用名； IpAddress为必填项，表示给容器赋的ip； ComputeTime为必填项，表示应用运行一个周期的平均时间； RequiredMemorySize为必填项，表示应用需求的内存； CpuRequest为选填项，单位为m, 1000表示需要占有一个cpu核，默认为1000； Period为必填项，表示应用周期间隔时长-->
-  <Application Name="HF_SM_1" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5a" PartitionId="1" IpAddress="10.31.40.1" Hardware="host7" ComputeTime="10" Period="50" RequiredMemorySize="10000" MacAddress="XXX" CPU="1" Core="1">
+  <Application Name="HF_SM_1" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5a" PartitionId="1" IpAddress="10.31.40.1" Hardware="host1" ComputeTime="10" Period="50" RequiredMemorySize="10000" MacAddress="XXX" CPU="1" Core="1">
     <TxPort Name="HF_SM_1_A" Guid="a76e6a012-ec88-4b23-b125-d8f8f215d22ea" Direction="Source" PortId="521" GID="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RefreshPeriod="50">
       <Message Name="MSG_HF_SM_1_A" Guid="a522af81d-b2b5-4d39-856c-e2db383b50d9a" MessageType="RDMA/TCP/UDP" MessageSize="800" TransmissionIntervalMinimum="50" Reliability="1" Period="10" QPType="UD/RC" QPN="" Priority="0/1/2/3">
-        <RxPort Name="RX_HF_SM_1_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_6" Direction="Destination" Hardware="host6" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.6" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
+        <RxPort Name="RX_HF_SM_1_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_6" Direction="Destination" Hardware="host3" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.6" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
       </Message>
     </TxPort>
     <TxPort Name="HF_SM_1_B" Guid="a76e6a012-ec88-4b23-b125-d8f8f215d22eb" Direction="Source" PortId="521" GID="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RefreshPeriod="50">
       <Message Name="MSG_HF_SM_1_B" Guid="a522af81d-b2b5-4d39-856c-e2db383b50d9b" MessageType="RDMA/TCP/UDP" MessageSize="128" TransmissionIntervalMinimum="50" Reliability="1" Period="100" QPType="UD/RC" QPN="" Priority="0/1/2/3">
-        <RxPort Name="RX_HF_SM_1_B" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939b" AppName="HF_SM_2" Direction="Destination" Hardware="host6" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.2" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
+        <RxPort Name="RX_HF_SM_1_B" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939b" AppName="HF_SM_2" Direction="Destination" Hardware="host2" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.2" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
       </Message>
     </TxPort>
   </Application>
-  <Application Name="HF_SM_2" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5b" PartitionId="1" IpAddress="10.31.40.2" Hardware="host6" ComputeTime="10" Period="50" RequiredMemorySize="10000" MacAddress="XXX" CPU="1" Core="1" />
+  <Application Name="HF_SM_2" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5b" PartitionId="1" IpAddress="10.31.40.2" Hardware="host2" ComputeTime="10" Period="50" RequiredMemorySize="10000" MacAddress="XXX" CPU="1" Core="1" />
   <Application Name="HF_SM_3" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5c" PartitionId="1" IpAddress="10.31.40.3" Hardware="host1" ComputeTime="12" Period="20" RequiredMemorySize="20000" MacAddress="XXX" CPU="1" Core="1">
     <TxPort Name="HF_SM_3_A" Guid="a76e6a012-ec88-4b23-b125-d8f8f215d22ea" Direction="Source" PortId="521" GID="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RefreshPeriod="50">
       <Message Name="MSG_HF_SM_3_A" Guid="a522af81d-b2b5-4d39-856c-e2db383b50d9a" MessageType="RDMA/TCP/UDP" MessageSize="900" TransmissionIntervalMinimum="50" Reliability="1" Period="10" QPType="UD/RC" QPN="" Priority="0/1/2/3">
-        <RxPort Name="RX_HF_SM_3_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_2" Direction="Destination" Hardware="host6" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.2" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
+        <RxPort Name="RX_HF_SM_3_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_2" Direction="Destination" Hardware="host2" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.2" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
       </Message>
     </TxPort>
   </Application>
@@ -31,19 +31,19 @@
   <Application Name="HF_SM_5" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5e" PartitionId="1" IpAddress="10.31.40.5" Hardware="host3" ComputeTime="18" Period="90" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1">
     <TxPort Name="HF_SM_5_A" Guid="a76e6a012-ec88-4b23-b125-d8f8f215d22ea" Direction="Source" PortId="521" GID="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RefreshPeriod="50">
       <Message Name="MSG_HF_SM_5_A" Guid="a522af81d-b2b5-4d39-856c-e2db383b50d9a" MessageType="RDMA/TCP/UDP" MessageSize="900" TransmissionIntervalMinimum="50" Reliability="1" Period="10" QPType="UD/RC" QPN="" Priority="0/1/2/3">
-        <RxPort Name="RX_HF_SM_5_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_7" Direction="Destination" Hardware="host4" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.7" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
+        <RxPort Name="RX_HF_SM_5_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_7" Direction="Destination" Hardware="host2" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.7" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
       </Message>
     </TxPort>
   </Application>
-  <Application Name="HF_SM_6" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5f" PartitionId="1" IpAddress="10.31.40.6" Hardware="host6" ComputeTime="10" Period="40" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1">
+  <Application Name="HF_SM_6" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5f" PartitionId="1" IpAddress="10.31.40.6" Hardware="host3" ComputeTime="10" Period="40" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1">
     <TxPort Name="HF_SM_6_A" Guid="a76e6a012-ec88-4b23-b125-d8f8f215d22ea" Direction="Source" PortId="521" GID="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RefreshPeriod="50">
       <Message Name="MSG_HF_SM_6_A" Guid="a522af81d-b2b5-4d39-856c-e2db383b50d9a" MessageType="RDMA/TCP/UDP" MessageSize="1100" TransmissionIntervalMinimum="50" Reliability="1" Period="10" QPType="UD/RC" QPN="" Priority="0/1/2/3">
-        <RxPort Name="RX_HF_SM_6_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_1" Direction="Destination" Hardware="host7" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.1" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
+        <RxPort Name="RX_HF_SM_6_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_1" Direction="Destination" Hardware="host1" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.1" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />
       </Message>
     </TxPort>
   </Application>
-  <Application Name="HF_SM_7" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5g" PartitionId="1" IpAddress="10.31.40.7" Hardware="host4" ComputeTime="12" Period="40" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1" />
-  <Application Name="HF_SM_8" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5h" PartitionId="1" IpAddress="10.31.40.8" Hardware="host5" ComputeTime="12" Period="40" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1">
+  <Application Name="HF_SM_7" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5g" PartitionId="1" IpAddress="10.31.40.7" Hardware="host2" ComputeTime="12" Period="40" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1" />
+  <Application Name="HF_SM_8" Guid="ae81b5196-ef76-4ff7-ae74-a679628280f5h" PartitionId="1" IpAddress="10.31.40.8" Hardware="host3" ComputeTime="12" Period="40" RequiredMemorySize="60000" MacAddress="XXX" CPU="1" Core="1">
     <TxPort Name="HF_SM_8_A" Guid="a76e6a012-ec88-4b23-b125-d8f8f215d22ea" Direction="Source" PortId="521" GID="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RefreshPeriod="50">
       <Message Name="MSG_HF_SM_8_A" Guid="a522af81d-b2b5-4d39-856c-e2db383b50d9a" MessageType="RDMA/TCP/UDP" MessageSize="1000" TransmissionIntervalMinimum="50" Reliability="1" Period="10" QPType="UD/RC" QPN="" Priority="0/1/2/3">
         <RxPort Name="RX_HF_SM_8_A" Guid="ae3306b45-2fb9-48d4-bc4c-bff457c1c939a" AppName="HF_SM_4" Direction="Destination" Hardware="host2" MacAddress="XXX" CPU="XXX" Core="1" GID="1" IpAddress="10.31.40.4" PartitionId="1" QueueLength="2" BufType="ONE_BUF_TYPE" ConnectType="RELIBLE" RecvMode="INTERUPT" RefreshPeriod="50" />

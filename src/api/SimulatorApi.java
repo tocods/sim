@@ -27,7 +27,7 @@ import static org.sim.controller.MyPainter.paintMultiLinkGraph;
 public class SimulatorApi {
     private SimpleExampleInterCloud simulator;
 //    private String input_topo = "./InputFiles/Input_TopoInfo.xml";
-//    private String input_host = "./InputFiles/Input_Hosts.xml";
+//    private String input_host = "./InputFiles/Input_Limits.xml";
 //    private String input_container = "./Intermediate/assign.json";
 //    public static String input_app = "./InputFiles/Input_AppInfo.xml";
 //    private String physicalf = "./Intermediate/physical.json";
@@ -81,16 +81,6 @@ public class SimulatorApi {
             e.printStackTrace();
         }
     }
-    /**
-     * 上传拓扑文件到系统
-     * @param fullFilePath 文件原路径
-     */
-    public static void uploadtopo(String fullFilePath) {
-//        String sysFilePath = System.getProperty("user.dir")+"\\InputFiles" + "\\Input_TopoInfo.xml";
-//        System.out.println("上传topo.xml文件到系统："+sysFilePath + " : " + fullFilePath);
-//        uploadFileToSys(fullFilePath, sysFilePath);
-        Constants.topoFile = new File(fullFilePath);
-    }
 
     /**
      * Checktopo()子函数，用于报错
@@ -118,13 +108,13 @@ public class SimulatorApi {
     public boolean Checktopo() throws Exception {
         System.out.println("开始文件数据关联性检测");
         // 所有的valid主机名
-        String xml = Files.lines(Constants.hostFile.toPath()).reduce("", String::concat);// Files.readString(Path.of(input_host));
+        String xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);// Files.readString(Path.of(input_host));
         JSONObject hostjson = XML.toJSONObject(xml);
-        JSONArray hosts = hostjson.getJSONObject("adag").getJSONArray("node");
+        JSONArray hosts = hostjson.getJSONObject("NetworkTopo").getJSONObject("EndSystems").getJSONArray("EndSystem");
         Set<String> hostnames = new HashSet<>();
         for(Object obj : hosts) {
             JSONObject host = (JSONObject) obj;
-            hostnames.add(host.getString("name"));
+            hostnames.add(host.getString("Name"));
         }
         // 所有的valid交换机名
         xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);
@@ -298,20 +288,20 @@ public class SimulatorApi {
             }
         }
         // 新建所有的主机
-        xml = Files.lines(Constants.hostFile.toPath()).reduce("", String::concat);//Files.readString(Path.of(input_host));
+        xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);//Files.readString(Path.of(input_host));
         JSONObject hostjson = XML.toJSONObject(xml);
-        JSONArray hosts = hostjson.getJSONObject("adag").getJSONArray("node");
+        JSONArray hosts = hostjson.getJSONObject("NetworkTopo").getJSONObject("EndSystems").getJSONArray("EndSystem");
         for(Object obj : hosts){
             JSONObject host = (JSONObject) obj;
             topo.accumulate("nodes", new JSONObject()
-                    .put("name",host.getString("name"))
+                    .put("name",host.getString("Name"))
                     .put("type","host")
-                    .put("datacenter",host.getString("network"))
-                    .put("bw",(long) host.getDouble("bandwidth")*1000000)
+                    .put("datacenter",host.getString("Group"))
+                    .put("bw",(long) 1000 *1000000)
                     .put("pes",host.getInt("cores"))
-                    .put("mips",host.getLong("mips"))
-                    .put("ram", host.getInt("memory"))
-                    .put("storage",host.getLong("storage")));
+                    .put("mips",Constants.averageMIPS)
+                    .put("ram", host.getInt("Memory") * 1000)
+                    .put("storage", Long.MAX_VALUE));
         }
         String jsonPrettyPrintString = topo.toString(4);
         //保存格式化后的json
@@ -322,6 +312,8 @@ public class SimulatorApi {
         CloudSim.bwLimit = 1.0;
 
         try {
+            xml = Files.lines(Constants.hostFile.toPath()).reduce("", String::concat);//Files.readString(Path.of(input_host));
+            hostjson = XML.toJSONObject(xml);
             JSONArray ups = hostjson.getJSONObject("adag").getJSONArray("utilization");
             for (Object obj : ups) {
                 JSONObject up = (JSONObject) obj;

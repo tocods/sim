@@ -19,7 +19,8 @@ public class scheduler {
         // 传入应用信息输入文件
         schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo.xml");
         // 传入物理节点信息输入文件
-        schedulerApi.uploadHostsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_Hosts.xml");
+        schedulerApi.uploadLimitsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_Limits.xml");
+        schedulerApi.uploadTopoXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\TopoInfo无线.xml");
         // 传入容器信息输入文件
         schedulerApi.uploadContainerInfo(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\ContainerInfo8.xml");
         // 传入错误注入文件

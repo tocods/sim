@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root />
+<root>
+  <FaultTime time="86.657" />
+  <FaultTime time="183.521" />
+  <FaultTime time="270.841" />
+  <FaultTime time="339.946" />
+  <FaultTime time="422.560" />
+  <FaultTime time="458.044" />
+  <FaultTime time="472.630" />
+  <FaultTime time="874.664" />
+  <FaultTime time="941.884" />
+  <FaultTime time="952.503" />
+  <FaultTime time="963.967" />
+</root>
