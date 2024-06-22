@@ -277,7 +277,7 @@ public class SDNController {
         // 新建所有的主机
         xml = Files.lines(Paths.get(input_host)).reduce("", String::concat);//Files.readString(Path.of(input_host));
         JSONObject hostjson = XML.toJSONObject(xml);
-        JSONArray hosts = hostjson.getJSONObject("adag").getJSONArray("node");
+        JSONArray hosts = hostjson.getJSONObject("constraint").getJSONArray("node");
         for(Object obj : hosts){
             JSONObject host = (JSONObject) obj;
             topo.accumulate("nodes", new JSONObject()
@@ -312,7 +312,7 @@ public class SDNController {
         CloudSim.bwLimit = 1.0;
 
         try {
-            JSONArray ups = hostjson.getJSONObject("adag").getJSONArray("utilization");
+            JSONArray ups = hostjson.getJSONObject("constraint").getJSONArray("utilization");
             for (Object obj : ups) {
                 JSONObject up = (JSONObject) obj;
                 String name = up.getString("type");
@@ -324,7 +324,7 @@ public class SDNController {
         } catch (Exception e){
             try {
                 JSONArray ups = new JSONArray();
-                ups.put(hostjson.getJSONObject("adag").getJSONObject("utilization"));
+                ups.put(hostjson.getJSONObject("constraint").getJSONObject("utilization"));
                 for (Object obj : ups) {
                     JSONObject up = (JSONObject) obj;
                     String name = up.getString("type");
@@ -459,7 +459,7 @@ public class SDNController {
         // 所有的valid主机名
         String xml = Files.lines(Paths.get(input_host)).reduce("", String::concat);// Files.readString(Path.of(input_host));
         JSONObject hostjson = XML.toJSONObject(xml);
-        JSONArray hosts = hostjson.getJSONObject("adag").getJSONArray("node");
+        JSONArray hosts = hostjson.getJSONObject("constraint").getJSONArray("node");
         Set<String> hostnames = new HashSet<>();
         for(Object obj : hosts) {
             JSONObject host = (JSONObject) obj;

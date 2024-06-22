@@ -67,17 +67,17 @@
         <AesPhysPort Name="A" Speed="2g" />
       </AesPhysPorts>
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host3" Memory="2096" cores="2">
+    <EndSystem Group="B" ATA="大屏触摸显示器1" HwType="GPM" Name="host3" Memory="2096" cores="2">
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host4" Memory="2096" cores="2">
+    <EndSystem Group="B" ATA="大屏触摸显示器1" HwType="GPM" Name="host4" Memory="2096" cores="2">
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host5" Memory="2096" cores="2">
+    <EndSystem Group="C" ATA="大屏触摸显示器1" HwType="GPM" Name="host5" Memory="2096" cores="2">
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host6" Memory="2096" cores="2">
+    <EndSystem Group="C" ATA="大屏触摸显示器1" HwType="GPM" Name="host6" Memory="2096" cores="2">
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host7" Memory="2096" cores="2">
+    <EndSystem Group="D" ATA="大屏触摸显示器1" HwType="GPM" Name="host7" Memory="2096" cores="2">
     </EndSystem>
-    <EndSystem Group="A" ATA="大屏触摸显示器1" HwType="GPM" Name="host8" Memory="2096" cores="2">
+    <EndSystem Group="D" ATA="大屏触摸显示器1" HwType="GPM" Name="host8" Memory="2096" cores="2">
     </EndSystem>
    </EndSystems>
 

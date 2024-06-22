@@ -314,7 +314,7 @@ public class SimulatorApi {
         try {
             xml = Files.lines(Constants.hostFile.toPath()).reduce("", String::concat);//Files.readString(Path.of(input_host));
             hostjson = XML.toJSONObject(xml);
-            JSONArray ups = hostjson.getJSONObject("adag").getJSONArray("utilization");
+            JSONArray ups = hostjson.getJSONObject("constraint").getJSONArray("utilization");
             for (Object obj : ups) {
                 JSONObject up = (JSONObject) obj;
                 String name = up.getString("type");
@@ -326,7 +326,7 @@ public class SimulatorApi {
         } catch (Exception e){
             try {
                 JSONArray ups = new JSONArray();
-                ups.put(hostjson.getJSONObject("adag").getJSONObject("utilization"));
+                ups.put(hostjson.getJSONObject("constraint").getJSONObject("utilization"));
                 for (Object obj : ups) {
                     JSONObject up = (JSONObject) obj;
                     String name = up.getString("type");
