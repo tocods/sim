@@ -212,7 +212,7 @@ public class Link {
 	}
 
 	public String toString() {
-		return "Link:"+this.highOrder.toString() + " <-> "+this.lowOrder.toString() + ", BW:" + upBW + ", Latency:"+ latency;
+		return "Link:"+this.highOrder.toString() + " <-> "+this.lowOrder.toString();
 	}
 
 	public String shortName() {

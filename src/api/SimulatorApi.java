@@ -107,6 +107,7 @@ public class SimulatorApi {
      */
     public boolean Checktopo() throws Exception {
         System.out.println("开始文件数据关联性检测");
+        boolean flag = true;
         // 所有的valid主机名
         String xml = Files.lines(Constants.topoFile.toPath()).reduce("", String::concat);// Files.readString(Path.of(input_host));
         JSONObject hostjson = XML.toJSONObject(xml);
@@ -131,20 +132,7 @@ public class SimulatorApi {
             JSONObject swch = (JSONObject) obj;
             hostnames.add(swch.getString("Name"));
         }
-        // 检查link有无非法名字
-        JSONArray links = topojson.getJSONObject("Links").getJSONArray("Link");
-        boolean flag = true;
-        for(Object obj : links) {
-            JSONObject link = (JSONObject) obj;
-            if(!hostnames.contains(link.getString("Src"))){//非法主机名
-                PrintInvalidName(link.getString("Src"), Constants.topoFile.getPath());
-                flag = false;
-            }
-            if(!hostnames.contains(link.getString("Dst"))){//非法主机名
-                PrintInvalidName(link.getString("Dst"), Constants.topoFile.getPath());
-                flag = false;
-            }
-        }
+
         return flag;
     }
 
