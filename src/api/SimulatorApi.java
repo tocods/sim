@@ -218,7 +218,7 @@ public class SimulatorApi {
             if( wirelessSwitchSet.contains(swchname) ){
                 swch.put("Type", "core");
             } else {
-                swch.put("Type", "edge");
+                swch.put("Type", "core");
             }
             // 该交换机的带宽
             JSONArray ports = swch.getJSONObject("AswPhysPorts").getJSONArray("AswPhysPort");
