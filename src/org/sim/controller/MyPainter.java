@@ -321,7 +321,7 @@ public class MyPainter extends JFrame {
         MyPainter p = new MyPainter("链路利用率图像");
         p.setSize(50000, 100000);
         Map<String, XYSeries> xySerieMap = new HashMap<>();
-        double maxvalue = 0;
+        double maxvalue = 10;
         for (LinkUtil lu : lus.values()) {
             if(lu.printable == false)
                 continue;
@@ -363,7 +363,7 @@ public class MyPainter extends JFrame {
         MyPainter p = new MyPainter(name+"利用率图像");
         p.setSize(50000, 100000);
         Map<String, XYSeries> xySerieMap = new HashMap<>();
-        double maxvalue = 0;
+        double maxvalue = 10;
         for (LinkUtil lu : lus.values()) {
             if(!lu.printable) {
                 continue;
