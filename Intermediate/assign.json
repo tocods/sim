@@ -1,5 +1,21 @@
 [
     {
+        "app": "h2",
+        "pausestart": 0,
+        "start": "1.1",
+        "datacenter": "Group1",
+        "mips": 500,
+        "type": "cn",
+        "pauseend": 0,
+        "size": 1000,
+        "name": "",
+        "host": "GPM1",
+        "end": "17.1",
+        "containerperiod": 20,
+        "pes": 0.5,
+        "ram": 10000
+    },
+    {
         "app": "h1",
         "pausestart": 0,
         "start": "1.1",
@@ -10,25 +26,9 @@
         "size": 1000,
         "name": "",
         "host": "GPM1",
-        "end": "12.1",
-        "containerperiod": 10,
-        "pes": 1,
-        "ram": 10000
-    },
-    {
-        "app": "h2",
-        "pausestart": 0,
-        "start": "1.1",
-        "datacenter": "Group1",
-        "mips": 500,
-        "type": "cn",
-        "pauseend": 0,
-        "size": 1000,
-        "name": "",
-        "host": "GPM2",
-        "end": "12.1",
-        "containerperiod": 10,
-        "pes": 1,
+        "end": "17.1",
+        "containerperiod": 20,
+        "pes": 0.5,
         "ram": 10000
     }
 ]

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AppInfo ICDVerison="BP2.3.1" RleaseDate="27/01/2021 21:52:29">
-  <Application Name="h1" Guid="9cdbb0de-54bd-41f7-9f61-1aff245180e6" Apptype="GPM" CPU="1" ComputeTime="10" Core="1" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" Period="10" RequiredMemorySize="10000">
+  <Application Name="h1" Guid="9cdbb0de-54bd-41f7-9f61-1aff245180e6" Apptype="GPM" CPU="1" ComputeTime="10" Core="1" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" Period="20" RequiredMemorySize="10000">
     <TxPort Name="NewMessage1" BufType="" ConnectType="" Direction="Source" QueueLength="10" RefreshPeriod="10">
       <Message Name="Msg_NewMessage1" Guid="d8831c9a-6804-4257-856b-344efe08e9b8" MessageSize="10" MessageType="" Period="10" Priority="1" QPN="" QPType="" Reliability="1" TransmissionIntervalMinimum="10">
-        <RxPort Name="NewMessage1_GPM2" Guid="" AppName="h2" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM2" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
+        <RxPort Name="NewMessage1_GPM2" Guid="" AppName="h2" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
       </Message>
     </TxPort>
     <TxPort Name="NewMessage2" BufType="" ConnectType="" Direction="Source" QueueLength="10" RefreshPeriod="10">
@@ -13,11 +13,19 @@
       </Message>
     </TxPort>
   </Application>
-  <Application Name="h2" Guid="98f5463a-c040-497f-b698-0afc698a94d3" Apptype="GPM" CPU="1" ComputeTime="10" Core="2" Hardware="GPM2" IpAddress="" MacAddress="" PartitionId="1" Period="10" RequiredMemorySize="10000">
+  <Application Name="h2" Guid="98f5463a-c040-497f-b698-0afc698a94d3" Apptype="GPM" CPU="1" ComputeTime="10" Core="2" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" Period="20" RequiredMemorySize="10000">
     <TxPort Name="NewMessage3" BufType="" ConnectType="" Direction="Source" QueueLength="10" RefreshPeriod="10">
       <Message Name="Msg_NewMessage3" Guid="7fa4aa13-3fe1-49bd-9d34-43a77e472251" MessageSize="10" MessageType="" Period="10" Priority="1" QPN="" QPType="" Reliability="1" TransmissionIntervalMinimum="10">
         <RxPort Name="NewMessage3_GPM1" Guid="" AppName="h1" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
-        <RxPort Name="NewMessage3_GPM2" Guid="" AppName="h2" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM2" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
+        <RxPort Name="NewMessage3_GPM2" Guid="" AppName="h2" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
+      </Message>
+    </TxPort>
+  </Application>
+  <Application Name="h2" Guid="98f5463a-c040-497f-b698-0afc698a94d3" Apptype="GPM" CPU="1" ComputeTime="10" Core="2" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" Period="20" RequiredMemorySize="10000">
+    <TxPort Name="NewMessage3" BufType="" ConnectType="" Direction="Source" QueueLength="10" RefreshPeriod="10">
+      <Message Name="Msg_NewMessage3" Guid="7fa4aa13-3fe1-49bd-9d34-43a77e472251" MessageSize="10" MessageType="" Period="10" Priority="1" QPN="" QPType="" Reliability="1" TransmissionIntervalMinimum="10">
+        <RxPort Name="NewMessage3_GPM1" Guid="" AppName="h1" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
+        <RxPort Name="NewMessage3_GPM2" Guid="" AppName="h2" BufType="" CPU="" ConnectType="" Core="" Direction="Destination" GID="" Hardware="GPM1" IpAddress="" MacAddress="" PartitionId="1" QueueLength="" RecvMode="" RefreshPeriod="" />
       </Message>
     </TxPort>
   </Application>

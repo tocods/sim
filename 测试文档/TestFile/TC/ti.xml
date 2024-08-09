@@ -104,17 +104,17 @@
         </Switch>
     </Switches>
     <EndSystems>
-        <EndSystem Name="GPM1" ATA="-1" cores="1" EdeSubscriberIndex="-1" EquipmentPosition="33" Group="Group1" HwTableBankIndex="-1" HwType="GPM" Memory="2096">
+        <EndSystem Name="GPM1" ATA="-1" cores="2" EdeSubscriberIndex="-1" EquipmentPosition="33" Group="Group1" HwTableBankIndex="-1" HwType="GPM" Memory="2096">
             <AesPhysPorts>
                 <AesPhysPort Name="A" MACAddress="2.0.0.1.21.20" Medium="COPPER" Network="A" Speed="1000"/>
                 <AesPhysPort Name="B" MACAddress="2.0.0.1.21.40" Medium="COPPER" Network="B" Speed="1000"/>
             </AesPhysPorts>
         </EndSystem>
-        <EndSystem Name="GPM2" ATA="-1" cores="1" EdeSubscriberIndex="-1" EquipmentPosition="33" Group="Group1" HwTableBankIndex="-1" HwType="GPM" Memory="2096">
-            <AesPhysPorts>
-                <AesPhysPort Name="A" MACAddress="2.0.0.1.21.20" Medium="COPPER" Network="A" Speed="1000"/>
-                <AesPhysPort Name="B" MACAddress="2.0.0.1.21.40" Medium="COPPER" Network="B" Speed="1000"/>
-            </AesPhysPorts>
-        </EndSystem>
+<!--        <EndSystem Name="GPM2" ATA="-1" cores="1" EdeSubscriberIndex="-1" EquipmentPosition="33" Group="Group1" HwTableBankIndex="-1" HwType="GPM" Memory="2096">-->
+<!--            <AesPhysPorts>-->
+<!--                <AesPhysPort Name="A" MACAddress="2.0.0.1.21.20" Medium="COPPER" Network="A" Speed="1000"/>-->
+<!--                <AesPhysPort Name="B" MACAddress="2.0.0.1.21.40" Medium="COPPER" Network="B" Speed="1000"/>-->
+<!--            </AesPhysPorts>-->
+<!--        </EndSystem>-->
     </EndSystems>
 </NetworkTopo>

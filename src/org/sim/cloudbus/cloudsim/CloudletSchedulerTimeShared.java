@@ -225,7 +225,7 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		usedRam = Math.min(currentRam, ramInUse);
 		// 如果任务书小于核数，那么每个任务占用一个核；否则进行分时复用
 		if (taskNum > (currentCPUs / 1000)) {
-			return mipsShare.get(0) / pesInUse;
+			return (currentCPUs / 1000) * mipsShare.get(0) / pesInUse;
 		} else {
 			return mipsShare.get(0);
 		}
