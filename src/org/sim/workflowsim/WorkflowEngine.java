@@ -325,7 +325,7 @@ public final class WorkflowEngine extends SimEntity {
         if(!this.vmAllocationPolicy.scheduleAll()) {
             this.shouldStop = true;
             Constants.nodeEnough = false;
-            Log.printLine("节点资源不足");
+            Log.printLine("节点资源不足[[[");
         }
         int i = 0;
         for(Job job: list) {

@@ -20,6 +20,12 @@ public class VmAllocationPolicyMaxMin extends VmAllocationPolicySimple{
 
     @Override
     public boolean scheduleAll() {
+        for(Vm v: getContainerList()) {
+            if(v.getHost() != null) {
+                if(!allocateHostForVm(v))
+                    return false;
+            }
+        }
         while(true) {
             Vm maxVm = null;
             for(Vm v1: getContainerList()) {
@@ -54,17 +60,24 @@ public class VmAllocationPolicyMaxMin extends VmAllocationPolicySimple{
         }
 
         if (!getVmTable().containsKey(vm.getUid())) {
+            Boolean ifStatic = true;
             do {
                 int moreFree = Integer.MIN_VALUE;
                 int idx = -1;
-                for (int i = 0; i < freePesTmp.size(); i++) {
-                    if(freePesTmp.get(i) == Integer.MIN_VALUE) {
-                        continue;
-                    }
-                    int totalUsedPes = getHostList().get(i).getNumberOfPes() - freePesTmp.get(i);
-                    if (totalUsedPes > moreFree) {
-                        moreFree = totalUsedPes;
-                        idx = i;
+                if(vm.getHost() != null && ifStatic) {
+                    idx = vm.getHost().getId();
+                    Log.printLine("静态调度");
+                    ifStatic = false;
+                } else {
+                    for (int i = 0; i < freePesTmp.size(); i++) {
+                        if (freePesTmp.get(i) == Integer.MIN_VALUE) {
+                            continue;
+                        }
+                        int totalUsedPes = getHostList().get(i).getNumberOfPes() - freePesTmp.get(i);
+                        if (totalUsedPes > moreFree) {
+                            moreFree = totalUsedPes;
+                            idx = i;
+                        }
                     }
                 }
                 if(idx == -1) {

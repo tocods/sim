@@ -47,13 +47,21 @@ public class VmAllocationPolicyK8s extends VmAllocationPolicySimple{
     @Override
     public boolean scheduleAll() {
         for(Vm v: getContainerList()) {
-            if(!allocateHostForVm(v))
+            if(v.getHost() != null) {
+                if(!allocateHostForVm(v)) {
+                    return false;
+                }
+            }
+        }
+        for(Vm v: getContainerList()) {
+            if(!allocateHostForVm(v)) {
                 return false;
+            }
         }
         return true;
     }
     @Override
-    public boolean allocateHostForVm(Vm vm) {
+    public boolean allocateHostForVm(Vm vm) {;
         int requiredPes = vm.getNumberOfPes();
         boolean result = false;
         int tries = 0;
@@ -62,6 +70,9 @@ public class VmAllocationPolicyK8s extends VmAllocationPolicySimple{
             freePesTmp.add(freePes);
         }
         Boolean ifStatic = true;
+        if(getVmTable().containsKey(vm.getUid())) {
+            return true;
+        }
         if (!getVmTable().containsKey(vm.getUid())) { // if this vm was not created
             do {// we still trying until we find a host or until we try all of them
                 double moreFree = Double.MIN_VALUE;
@@ -69,7 +80,7 @@ public class VmAllocationPolicyK8s extends VmAllocationPolicySimple{
                 // 只有以下情况会静态调度：输入文件 AppInfo.xml在 application 的 hardware 字段指定了物理节点
                 if(vm.getHost() != null && ifStatic) {
                     idx = vm.getHost().getId();
-                    Log.printLine("静态调度");
+                    Log.printLine("静态调度2" + vm.getHost().getName());
                     ifStatic = false;
                 } else {
                     for (int i = 0; i < freePesTmp.size(); i++) {
@@ -90,7 +101,6 @@ public class VmAllocationPolicyK8s extends VmAllocationPolicySimple{
                 Host host = getHostList().get(idx);
                 // 就算物理节点的分数最高，它依然有可能没有足够的资源承接任务
                 result = host.vmCreate(vm);
-
                 if (result) { // 创建任务成功
                     getVmTable().put(vm.getUid(), host);
                     getUsedPes().put(vm.getUid(), requiredPes);

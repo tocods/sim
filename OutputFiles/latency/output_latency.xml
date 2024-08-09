@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <NetworkDelay>
 <Messages>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.1610099999999999E-4" EndTime="1.441E-4" NetworkTime="1.7801256419583877E-5" WaitingTime="1.0197743580416137E-5" EndtoEndTime="2.7999000000000014E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.13101E-4" EndTime="1.3110000000000002E-4" NetworkTime="1.722189240959769E-5" WaitingTime="7.771075904023359E-7" EndtoEndTime="1.7999000000000015E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.41101E-4" EndTime="1.701E-4" NetworkTime="1.7985719904095895E-5" WaitingTime="1.1013280095904083E-5" EndtoEndTime="2.8998999999999984E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.3810099999999998E-4" EndTime="1.571E-4" NetworkTime="1.7873717162011637E-5" WaitingTime="1.1252828379883684E-6" EndtoEndTime="1.8999000000000012E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.66101E-4" EndTime="1.9609999999999997E-4" NetworkTime="1.7675954311229262E-5" WaitingTime="1.232304568877073E-5" EndtoEndTime="2.999899999999998E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.63101E-4" EndTime="1.8309999999999998E-4" NetworkTime="1.7810861486073298E-5" WaitingTime="2.188138513926674E-6" EndtoEndTime="1.9998999999999983E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.91101E-4" EndTime="2.0909999999999996E-4" NetworkTime="1.7648664662991703E-5" WaitingTime="3.503353370082514E-7" EndtoEndTime="1.799899999999996E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="1.8810099999999998E-4" EndTime="2.0909999999999996E-4" NetworkTime="1.7893500963315447E-5" WaitingTime="3.105499036684526E-6" EndtoEndTime="2.099899999999998E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.1610099999999998E-4" EndTime="2.3509999999999994E-4" NetworkTime="1.7690780868818325E-5" WaitingTime="1.3082191311816467E-6" EndtoEndTime="1.8998999999999958E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.13101E-4" EndTime="2.3509999999999994E-4" NetworkTime="1.7496463869207284E-5" WaitingTime="4.502536130792653E-6" EndtoEndTime="2.199899999999995E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.41101E-4" EndTime="2.6109999999999995E-4" NetworkTime="1.761379740849437E-5" WaitingTime="2.385202591505568E-6" EndtoEndTime="1.9998999999999955E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.3810099999999998E-4" EndTime="2.6109999999999995E-4" NetworkTime="1.748330456029705E-5" WaitingTime="5.5156954397029396E-6" EndtoEndTime="2.2998999999999974E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.66101E-4" EndTime="2.8709999999999993E-4" NetworkTime="1.752404079884933E-5" WaitingTime="3.4749592011506375E-6" EndtoEndTime="2.0998999999999953E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.63101E-4" EndTime="2.8709999999999993E-4" NetworkTime="1.7751978946846905E-5" WaitingTime="6.247021053153005E-6" EndtoEndTime="2.3998999999999917E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.91101E-4" EndTime="3.130999999999999E-4" NetworkTime="1.7875701840115475E-5" WaitingTime="4.123298159884451E-6" EndtoEndTime="2.1998999999999923E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="2.8810099999999997E-4" EndTime="3.130999999999999E-4" NetworkTime="1.768547697951087E-5" WaitingTime="7.313523020489063E-6" EndtoEndTime="2.499899999999994E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.16101E-4" EndTime="3.390999999999999E-4" NetworkTime="1.732996807655422E-5" WaitingTime="5.669031923445688E-6" EndtoEndTime="2.2998999999999893E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.13101E-4" EndTime="3.390999999999999E-4" NetworkTime="1.7544916520659364E-5" WaitingTime="8.454083479340544E-6" EndtoEndTime="2.599899999999991E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.4110099999999996E-4" EndTime="3.650999999999999E-4" NetworkTime="1.7654820059917746E-5" WaitingTime="6.3441799400821815E-6" EndtoEndTime="2.3998999999999917E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.38101E-4" EndTime="3.650999999999999E-4" NetworkTime="1.7607222967842045E-5" WaitingTime="9.391777032157834E-6" EndtoEndTime="2.699899999999988E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.6610099999999997E-4" EndTime="3.9109999999999986E-4" NetworkTime="1.79562955177381E-5" WaitingTime="7.04270448226177E-6" EndtoEndTime="2.4998999999999887E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.63101E-4" EndTime="3.9109999999999986E-4" NetworkTime="1.7578631797793946E-5" WaitingTime="1.0420368202205892E-5" EndtoEndTime="2.7998999999999852E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.91101E-4" EndTime="4.1709999999999984E-4" NetworkTime="1.79787726679405E-5" WaitingTime="8.02022733205934E-6" EndtoEndTime="2.5998999999999857E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="3.8810099999999996E-4" EndTime="4.1709999999999984E-4" NetworkTime="1.7584726566684004E-5" WaitingTime="1.1414273433315875E-5" EndtoEndTime="2.8998999999999876E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.16101E-4" EndTime="4.430999999999998E-4" NetworkTime="1.778780837219009E-5" WaitingTime="9.21119162780972E-6" EndtoEndTime="2.6998999999999827E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.13101E-4" EndTime="4.430999999999998E-4" NetworkTime="1.797031884530637E-5" WaitingTime="1.2028681154693495E-5" EndtoEndTime="2.9998999999999846E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.41101E-4" EndTime="4.690999999999998E-4" NetworkTime="1.7568151781557336E-5" WaitingTime="1.0430848218442445E-5" EndtoEndTime="2.7998999999999797E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.38101E-4" EndTime="4.560999999999998E-4" NetworkTime="1.7274370003755957E-5" WaitingTime="7.246299962438817E-7" EndtoEndTime="1.7998999999999825E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.6610099999999996E-4" EndTime="4.950999999999998E-4" NetworkTime="1.742328831740765E-5" WaitingTime="1.157571168259225E-5" EndtoEndTime="2.8998999999999876E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.63101E-4" EndTime="4.820999999999998E-4" NetworkTime="1.7725766993528504E-5" WaitingTime="1.2732330064713082E-6" EndtoEndTime="1.8998999999999796E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.91101E-4" EndTime="5.210999999999998E-4" NetworkTime="1.7798544155799764E-5" WaitingTime="1.2200455844200032E-5" EndtoEndTime="2.9998999999999846E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="4.8810099999999995E-4" EndTime="5.080999999999998E-4" NetworkTime="1.756071240388206E-5" WaitingTime="2.438287596117825E-6" EndtoEndTime="1.9998999999999874E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.161009999999999E-4" EndTime="5.340999999999998E-4" NetworkTime="1.720142410201981E-5" WaitingTime="7.975758979801009E-7" EndtoEndTime="1.799899999999988E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.13101E-4" EndTime="5.340999999999998E-4" NetworkTime="1.8016077128542707E-5" WaitingTime="2.9829228714571034E-6" EndtoEndTime="2.0998999999999844E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.41101E-4" EndTime="5.600999999999998E-4" NetworkTime="1.7839600755497953E-5" WaitingTime="1.159399244501859E-6" EndtoEndTime="1.8998999999999796E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.381009999999999E-4" EndTime="5.600999999999998E-4" NetworkTime="1.7497819149856065E-5" WaitingTime="4.501180850143851E-6" EndtoEndTime="2.199899999999987E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.66101E-4" EndTime="5.860999999999998E-4" NetworkTime="1.743289317566764E-5" WaitingTime="2.566106824332219E-6" EndtoEndTime="1.999899999999982E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.63101E-4" EndTime="5.860999999999998E-4" NetworkTime="1.7843819185551758E-5" WaitingTime="5.1551808144480096E-6" EndtoEndTime="2.2998999999999784E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.91101E-4" EndTime="6.120999999999998E-4" NetworkTime="1.7623038662317956E-5" WaitingTime="3.375961337681783E-6" EndtoEndTime="2.0998999999999736E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="5.881009999999999E-4" EndTime="6.120999999999998E-4" NetworkTime="1.7889111857323925E-5" WaitingTime="6.10988814267585E-6" EndtoEndTime="2.399899999999981E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.16101E-4" EndTime="6.380999999999997E-4" NetworkTime="1.7330302829471553E-5" WaitingTime="4.66869717052822E-6" EndtoEndTime="2.199899999999976E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.13101E-4" EndTime="6.380999999999997E-4" NetworkTime="1.7423519908948252E-5" WaitingTime="7.575480091051448E-6" EndtoEndTime="2.4998999999999725E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.411009999999999E-4" EndTime="6.640999999999997E-4" NetworkTime="1.7864585311395353E-5" WaitingTime="5.134414688604482E-6" EndtoEndTime="2.2998999999999784E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.38101E-4" EndTime="6.640999999999997E-4" NetworkTime="1.7377432017557805E-5" WaitingTime="8.621567982441893E-6" EndtoEndTime="2.599899999999975E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.66101E-4" EndTime="6.900999999999997E-4" NetworkTime="1.7550327460641542E-5" WaitingTime="6.448672539358124E-6" EndtoEndTime="2.39989999999997E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.631009999999999E-4" EndTime="6.900999999999997E-4" NetworkTime="1.736945603383444E-5" WaitingTime="9.629543966165337E-6" EndtoEndTime="2.6998999999999773E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.91101E-4" EndTime="7.160999999999997E-4" NetworkTime="1.7764249241801332E-5" WaitingTime="7.234750758198399E-6" EndtoEndTime="2.4998999999999725E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="6.88101E-4" EndTime="7.160999999999997E-4" NetworkTime="1.7827925660772677E-5" WaitingTime="1.0171074339227057E-5" EndtoEndTime="2.799899999999969E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.16101E-4" EndTime="7.420999999999997E-4" NetworkTime="1.7660903585292682E-5" WaitingTime="8.338096414706934E-6" EndtoEndTime="2.599899999999964E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.13101E-4" EndTime="7.420999999999997E-4" NetworkTime="1.7376457508310416E-5" WaitingTime="1.1622542491689352E-5" EndtoEndTime="2.8998999999999713E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.41101E-4" EndTime="7.680999999999996E-4" NetworkTime="1.7867779879390244E-5" WaitingTime="9.131220120609461E-6" EndtoEndTime="2.6998999999999665E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.38101E-4" EndTime="7.680999999999996E-4" NetworkTime="1.8000765495643443E-5" WaitingTime="1.199823450435619E-5" EndtoEndTime="2.999899999999963E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.661009999999999E-4" EndTime="7.940999999999996E-4" NetworkTime="1.7735364534996107E-5" WaitingTime="1.0263635465003582E-5" EndtoEndTime="2.799899999999969E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.63101E-4" EndTime="7.810999999999996E-4" NetworkTime="1.7791665088861805E-5" WaitingTime="2.073349111378917E-7" EndtoEndTime="1.7998999999999663E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.91101E-4" EndTime="8.200999999999996E-4" NetworkTime="1.7881771584403107E-5" WaitingTime="1.1117228415596491E-5" EndtoEndTime="2.8998999999999605E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="7.881009999999999E-4" EndTime="8.070999999999996E-4" NetworkTime="1.7582890766278832E-5" WaitingTime="1.416109233720879E-6" EndtoEndTime="1.8998999999999687E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.16101E-4" EndTime="8.460999999999996E-4" NetworkTime="1.742093835353465E-5" WaitingTime="1.257806164646502E-5" EndtoEndTime="2.999899999999963E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.13101E-4" EndTime="8.330999999999996E-4" NetworkTime="1.782321386404908E-5" WaitingTime="2.1757861359504842E-6" EndtoEndTime="1.9998999999999603E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.411009999999999E-4" EndTime="8.590999999999996E-4" NetworkTime="1.733123868810346E-5" WaitingTime="6.677613118962139E-7" EndtoEndTime="1.7998999999999663E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.38101E-4" EndTime="8.590999999999996E-4" NetworkTime="1.7943778959065905E-5" WaitingTime="3.055221040933675E-6" EndtoEndTime="2.0998999999999627E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.66101E-4" EndTime="8.850999999999996E-4" NetworkTime="1.735102686497569E-5" WaitingTime="1.6479731350238632E-6" EndtoEndTime="1.899899999999958E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.631009999999999E-4" EndTime="8.850999999999996E-4" NetworkTime="1.7599809513521017E-5" WaitingTime="4.399190486478678E-6" EndtoEndTime="2.199899999999965E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.911009999999999E-4" EndTime="9.110999999999995E-4" NetworkTime="1.752146350922434E-5" WaitingTime="2.477536490775277E-6" EndtoEndTime="1.9998999999999603E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.88101E-4" EndTime="9.110999999999995E-4" NetworkTime="1.7485840594434482E-5" WaitingTime="5.5131594055650955E-6" EndtoEndTime="2.2998999999999568E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.16101E-4" EndTime="9.370999999999995E-4" NetworkTime="1.7549468864784157E-5" WaitingTime="3.4495311352153316E-6" EndtoEndTime="2.099899999999952E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.131009999999999E-4" EndTime="9.370999999999995E-4" NetworkTime="1.7583715913396705E-5" WaitingTime="6.415284086602833E-6" EndtoEndTime="2.3998999999999592E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.41101E-4" EndTime="9.630999999999995E-4" NetworkTime="1.7505973815564793E-5" WaitingTime="4.493026184434774E-6" EndtoEndTime="2.1998999999999543E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.38101E-4" EndTime="9.630999999999995E-4" NetworkTime="1.7830076389092545E-5" WaitingTime="7.168923610906936E-6" EndtoEndTime="2.4998999999999508E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.661009999999999E-4" EndTime="9.890999999999995E-4" NetworkTime="1.799581028617022E-5" WaitingTime="5.00318971382945E-6" EndtoEndTime="2.2998999999999568E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.63101E-4" EndTime="9.890999999999995E-4" NetworkTime="1.7834274069976626E-5" WaitingTime="8.164725930022865E-6" EndtoEndTime="2.5998999999999532E-5" PkgSizeKB="0.8">
 	</Message>
-	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.911009999999999E-4" EndTime="0.0010150999999999995" NetworkTime="1.7615276913749282E-5" WaitingTime="6.3837230862503775E-6" EndtoEndTime="2.3998999999999592E-5" PkgSizeKB="0.8">
+	<Message MessageName="RX_HF_SM_1_A" Src="10.31.40.1" Dst="10.31.40.2" StartTime="9.88101E-4" EndTime="0.0010150999999999995" NetworkTime="1.74200410097801E-5" WaitingTime="9.57895899021937E-6" EndtoEndTime="2.6998999999999556E-5" PkgSizeKB="0.8">
 	</Message>
 </Messages>
-<TotalNetworkTime Time="6.353570035822854E-4"/>
-<AvgNetworkTime Time="1.7648805655063484E-5"/>
+<TotalNetworkTime Time="6.355815525911111E-4"/>
+<AvgNetworkTime Time="1.7655043127530863E-5"/>
 </NetworkDelay>
