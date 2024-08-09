@@ -4,6 +4,7 @@ import api.SchedulerApi;
 import api.SimulatorApi;
 import org.sim.cloudbus.cloudsim.Log;
 import org.sim.controller.Result;
+import org.sim.controller.ResultDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,10 @@ public class scheduler {
         // 更改输出文件目录
         //schedulerApi.setSchedulerOutputPath(System.getProperty("user.dir") + "\\输出");
         // 传入应用信息输入文件
-        schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_AppInfo.xml");
+        schedulerApi.uploadAppsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\ai.xml");
         // 传入物理节点信息输入文件
         schedulerApi.uploadLimitsXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\Input_Limits.xml");
-        schedulerApi.uploadTopoXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\TopoInfo无线.xml");
+        schedulerApi.uploadTopoXml(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\ti.xml");
         // 传入容器信息输入文件
         schedulerApi.uploadContainerInfo(System.getProperty("user.dir") + "\\测试文档\\TestFile\\TC\\ContainerInfo8.xml");
         // 传入错误注入文件
@@ -28,7 +29,11 @@ public class scheduler {
         // 设置暂停
         // simulatorApi.pauseContainer(8, 1.0, 10.0);
         // 设置调度算法
-        schedulerApi.startSchedule(SchedulerApi.HEFT);
+        ResultDTO ret = schedulerApi.startSchedule(SchedulerApi.K8S);
+        if(ret.ifError()){
+            Log.printLine("集群资源不足");
+            return;
+        }
         //schedulerApi.startSchedule(SchedulerApi.K8S);
         //schedulerApi.startSchedule(SchedulerApi.MAXMIN);
 

@@ -42,7 +42,7 @@ public class Cloudlet {
 	}
 
 	public double getStartTime() {
-		return startdown + (startup - startdown) * Math.random();
+		return startdown + (startup - startdown);
 	}
 
 	/**

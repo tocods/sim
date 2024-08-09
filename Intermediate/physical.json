@@ -166,7 +166,7 @@
         {
             "bw": 1000000000,
             "name": "host3",
-            "datacenter": "A",
+            "datacenter": "B",
             "storage": 9223372036854775807,
             "type": "host",
             "mips": 1000,
@@ -176,7 +176,7 @@
         {
             "bw": 1000000000,
             "name": "host4",
-            "datacenter": "A",
+            "datacenter": "B",
             "storage": 9223372036854775807,
             "type": "host",
             "mips": 1000,
@@ -186,7 +186,7 @@
         {
             "bw": 1000000000,
             "name": "host5",
-            "datacenter": "A",
+            "datacenter": "C",
             "storage": 9223372036854775807,
             "type": "host",
             "mips": 1000,
@@ -196,7 +196,7 @@
         {
             "bw": 1000000000,
             "name": "host6",
-            "datacenter": "A",
+            "datacenter": "C",
             "storage": 9223372036854775807,
             "type": "host",
             "mips": 1000,
@@ -206,7 +206,7 @@
         {
             "bw": 1000000000,
             "name": "host7",
-            "datacenter": "A",
+            "datacenter": "D",
             "storage": 9223372036854775807,
             "type": "host",
             "mips": 1000,
@@ -216,7 +216,7 @@
         {
             "bw": 1000000000,
             "name": "host8",
-            "datacenter": "A",
+            "datacenter": "D",
             "storage": 9223372036854775807,
             "type": "host",
             "mips": 1000,

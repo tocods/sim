@@ -53,7 +53,7 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
 
         public double start;
         public double finish;
-        public int    cpu;
+        public int cpu;
 
         public Event(double start, double finish) {
             this.start = start;
@@ -61,7 +61,6 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
             this.cpu = cpu;
         }
     }
-
 
 
     public class TaskRank implements Comparable<TaskRank> {
@@ -97,7 +96,7 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
     public void run() {
         Log.printLine("HEFT planner running with " + getTaskList().size()
                 + " tasks.");
-        for(Host h: hosts)
+        for (Host h : hosts)
             schedules.put(h.getId(), new ArrayList<>());
         averageBandwidth = calculateAverageBandwidth();
         // Prioritization phase
@@ -135,7 +134,7 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
                     costsVm.put(host, Double.MAX_VALUE);
                 } else {
                     costsVm.put(host,
-                            ((double)task.getCloudletTotalLength() / (double)(host.getPeList().get(0).getMips())));
+                            ((double) task.getCloudletTotalLength() / (double) (host.getPeList().get(0).getMips())));
                 }
             }
             computationCosts.put(task, costsVm);
@@ -196,14 +195,14 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
         }*/
         double acc = 0.0;
         List<Pair<String, String>> ipAndSizes = Constants.name2Ips.get(child.name);
-        if(ipAndSizes == null)
+        if (ipAndSizes == null)
             return 0;
-        for(Pair<String, String> ias: ipAndSizes) {
+        for (Pair<String, String> ias : ipAndSizes) {
             String ip = ias.getKey();
             String mSize = ias.getValue();
             String destName = Constants.ip2taskName.get(ip);
             //Log.printLine("ip: " + ip + " size: " + mSize);
-            if(destName!=null && destName.equals(parent.name)) {
+            if (destName != null && destName.equals(parent.name)) {
                 acc += Double.parseDouble(mSize);
             }
         }
@@ -265,6 +264,25 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
 
         // Sorting in non-ascending order of rank
         Collections.sort(taskRank);
+        for (TaskRank ranl : taskRank) {
+            Host h = null;
+            if (!Objects.equals(ranl.task.hardware, "")) {
+                for (Host host : hosts) {
+                    if (host.getName().equals(ranl.task.hardware)) {
+                        h = host;
+                        break;
+                    }
+                }
+            }
+            if (h != null) {
+                CondorVM containerTmp = new CondorVM(ranl.task.getCloudletId(), 1, h.getVmScheduler().getPeCapacity(), ranl.task.getNumberOfPes(), (int) ranl.task.getRam(), 0, 0, "Xen", new CloudletSchedulerTimeShared());
+                // 我们首先判断是否有足够的资源创建容器
+                if (!h.vmCreate(containerTmp)) {
+                    continue;
+                }
+                ranl.task.setVmId(h.getId());
+            }
+        }
         for (TaskRank rank : taskRank) {
             allocateTask(rank.task);
         }
@@ -284,11 +302,47 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
         double bestReadyTime = 0.0;
         double finishTime;
         if(task.getVmId() != -1) {
-            return;
+            //return;
+            Host h = null;
+            for (Host host : hosts) {
+                if (host.getId() == task.getVmId()) {
+                    h = host;
+                    break;
+                }
+            }
+            if (h != null) {
+                double minReadyTime = 0.0;
+                for (Task parent : task.getParentList()) {
+                    double readyTime = earliestFinishTimes.get(parent);
+                    List<Pair<String, String>> ipAndSizes = Constants.name2Ips.get(parent.name);
+                    if (ipAndSizes != null) {
+                        for (Pair<String, String> ias : ipAndSizes) {
+                            String ip = ias.getKey();
+                            String mSize = ias.getValue();
+                            String destName = Constants.ip2taskName.get(ip);
+                            if (destName.equals(h.getName()) && sched.get(parent.name).getId() != h.getId()) {
+                                readyTime += Double.parseDouble(mSize) * 8 / (h.getBw() * Consts.MILLION);
+                            }
+                        }
+                    }
+                    minReadyTime = Math.max(minReadyTime, readyTime);
+                }
+                Log.printLine(minReadyTime);
+                finishTime = findFinishimeStatic(task, h, minReadyTime).getSecond();
+                if(finishTime != Double.MAX_VALUE) {
+                    Log.printLine("静态分配");
+                    earliestFinishTimes.put(task, earliestFinishTime);
+                    Log.printLine(task.name + "被分配至节点" + h.getName());
+                    task.setVmId(h.getId());
+                    sched.put(task.name, h);
+                    Constants.schedulerResult.put(task.name, h.getId());
+                    Constants.scheduleResults.add(new ScheduleResult(h.getId(), task.name, task.getNumberOfPes(), task.getRam()));
+                    return;
+                }
+            }
         }
         for (Host host : hosts) {
             double minReadyTime = 0.0;
-
             for (Task parent : task.getParentList()) {
                 double readyTime = earliestFinishTimes.get(parent);
                 List<Pair<String, String>> ipAndSizes = Constants.name2Ips.get(parent.name);
@@ -416,6 +470,65 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
         }
         if (occupySlot) {
             sched.add(pos, new Event(start, finish));
+        }
+        return new Pair<>(start, finish);
+    }
+
+    private Pair<Double, Double> findFinishimeStatic(Task task, Host vm, double readyTime) {
+        CondorVM containerTmp = new CondorVM(task.getCloudletId(), 1, vm.getVmScheduler().getPeCapacity(), task.getNumberOfPes(), (int) task.getRam(), 0, 0, "Xen", new CloudletSchedulerTimeShared());
+        List<Event> sched = schedules.get(vm.getId());
+        double computationCost = computationCosts.get(task).get(vm);
+        double start, finish;
+        int pos;
+
+        if (sched.isEmpty()) {
+            return new Pair<>(readyTime, readyTime + computationCost);
+        }
+
+        if (sched.size() == 1) {
+            if (readyTime >= sched.get(0).finish) {
+                pos = 1;
+                start = readyTime;
+            } else if (readyTime + computationCost <= sched.get(0).start) {
+                pos = 0;
+                start = readyTime;
+            } else {
+                pos = 1;
+                start = sched.get(0).finish;
+            }
+            return new Pair<>(start, start + computationCost);
+        }
+        // Trivial case: Start after the latest task scheduled
+        start = Math.max(readyTime, sched.get(sched.size() - 1).finish);
+        finish = start + computationCost;
+        int i = sched.size() - 1;
+        int j = sched.size() - 2;
+        pos = i + 1;
+        while (j >= 0) {
+            Event current = sched.get(i);
+            Event previous = sched.get(j);
+
+            if (readyTime > previous.finish) {
+                if (readyTime + computationCost <= current.start) {
+                    start = readyTime;
+                    finish = readyTime + computationCost;
+                }
+
+                break;
+            }
+            if (previous.finish + computationCost <= current.start) {
+                start = previous.finish;
+                finish = previous.finish + computationCost;
+                pos = i;
+            }
+            i--;
+            j--;
+        }
+
+        if (readyTime + computationCost <= sched.get(0).start) {
+            pos = 0;
+            start = readyTime;
+            return new Pair<>(start, start + computationCost);
         }
         return new Pair<>(start, finish);
     }
